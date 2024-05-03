@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:swarden/app/presentation/s_warden_app.dart';
+import 'package:swarden/app/presentation/swarden_app.dart';
 
 import '../views/auth/auth_view.dart';
 import '../views/auth/change_password/change_password_view.dart';

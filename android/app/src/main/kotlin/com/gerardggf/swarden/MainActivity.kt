@@ -1,4 +1,4 @@
-package com.example.swarden
+package com.grardggf.swarden
 
 import io.flutter.embedding.android.FlutterActivity
 

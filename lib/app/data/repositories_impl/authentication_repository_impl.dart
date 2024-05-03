@@ -23,7 +23,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   @override
   Future<Either<FirebaseResult, UserModel>> signIn(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     try {
       final credentials = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);

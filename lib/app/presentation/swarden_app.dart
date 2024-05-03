@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:swarden/app/core/const/global.dart';
+import 'package:swarden/app/presentation/global/theme.dart';
 import 'package:swarden/app/presentation/routes/router.dart';
 
 import '../core/generated/translations.g.dart';
@@ -23,7 +24,7 @@ class _SWardenAppState extends State<SWardenApp> with RoutesMixin {
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         debugShowCheckedModeBanner: false,
         title: Global.appName,
-        themeMode: ThemeMode.light,
+        theme: SWardenTheme.lightTeme,
         routerConfig: router,
       ),
     );

@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '901714219814',
     projectId: 'swarden-809a5',
     storageBucket: 'swarden-809a5.appspot.com',
-    iosBundleId: 'com.example.swarden',
+    iosBundleId: 'com.grardggf.swarden',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '901714219814',
     projectId: 'swarden-809a5',
     storageBucket: 'swarden-809a5.appspot.com',
-    iosBundleId: 'com.example.swarden',
+    iosBundleId: 'com.grardggf.swarden',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/core/generated/translations.g.dart';
 import 'app/core/global_providers.dart';
-import 'app/presentation/s_warden_app.dart';
+import 'app/presentation/swarden_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
