@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nebben/app/domain/enums.dart';
-import 'package:nebben/app/presentation/views/auth/forgot_password/state/forgot_password_state.dart';
 
+import '../../../../domain/enums/firebase_results.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
+import 'state/forgot_password_state.dart';
 
 final forgotPasswordControllerProvider =
     StateNotifierProvider<ForgotPasswordController, ForgotPasswordState>(

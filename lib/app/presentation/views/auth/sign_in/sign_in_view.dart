@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nebben/app/core/const/firebase_errors_extension.dart';
-import 'package:nebben/app/core/generated/translations.g.dart';
-import 'package:nebben/app/presentation/global/dialogs.dart';
-import 'package:nebben/app/presentation/global/extensions/num_to_sizedbox.dart';
-import 'package:nebben/app/presentation/global/widgets/nebben_button.dart';
-import 'package:nebben/app/presentation/views/auth/auth_view.dart';
-import 'package:nebben/app/presentation/views/auth/sign_in/sign_in_controller.dart';
+import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../../core/const/assets.dart';
 import '../../../../core/const/colors.dart';
+import '../../../../core/generated/translations.g.dart';
+import '../../../global/dialogs/dialogs.dart';
+import '../auth_view.dart';
 import '../forgot_password/forgot_password_view.dart';
 import '../register/register_view.dart';
+import 'sign_in_controller.dart';
 
 class SignInView extends ConsumerStatefulWidget {
   const SignInView({super.key});
@@ -109,7 +108,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                       },
                     ),
                     40.h,
-                    NebbenButton(
+                    ElevatedButton(
                       onPressed: _submit,
                       child: Text(
                         texts.auth.signIn,
@@ -149,7 +148,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                       child: Text(
                         texts.auth.register,
                         style: const TextStyle(
-                          color: AppColors.logo,
+                          color: AppColors.light,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -177,7 +176,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
 
     result.when(
       left: (failure) {
-        NebbenDialogs.snackBar(
+        SWardenDialogs.snackBar(
           context: context,
           text: failure.toText(),
           color: Colors.orange,
@@ -185,7 +184,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
       },
       right: (data) {
         context.pushReplacementNamed(AuthView.routeName);
-        NebbenDialogs.snackBar(
+        SWardenDialogs.snackBar(
           context: context,
           text: texts.auth.loggedIn,
         );

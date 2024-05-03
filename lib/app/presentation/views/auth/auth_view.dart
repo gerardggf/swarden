@@ -7,9 +7,9 @@ import '../../global/widgets/error_info_widget.dart';
 import '../../global/widgets/loading_widget.dart';
 import '../home/home_view.dart';
 
-// final authStateChangesStreamProvider = StreamProvider<User?>(
-//   (ref) => ref.watch(firebaseAuthProvider).authStateChanges(),
-// );
+final authStateChangesStreamProvider = StreamProvider<User?>(
+  (ref) => FirebaseAuth.instance.authStateChanges(),
+);
 
 class AuthView extends ConsumerWidget {
   const AuthView({super.key});

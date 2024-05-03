@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../domain/enums/firebase_results.dart';
+import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/change_password_state.dart';
 
 final changePasswordControllerProvider =

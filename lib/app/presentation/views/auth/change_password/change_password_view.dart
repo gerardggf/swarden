@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../../core/const/colors.dart';
+import '../../../../core/generated/translations.g.dart';
+import '../../../../domain/enums/firebase_results.dart';
+import '../../../global/dialogs/dialogs.dart';
 import 'change_password_controller.dart';
 
 class ChangePasswordView extends ConsumerStatefulWidget {
@@ -49,7 +53,7 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
                           // ),
                           20.h,
                           Text(
-                            'Change password', //texts.profile.changePassword,
+                            texts.auth.changePassword,
                             style: const TextStyle(
                               color: AppColors.light,
                               fontSize: 26,
@@ -82,7 +86,7 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
                           },
                         ),
                         40.h,
-                        NebbenButton(
+                        ElevatedButton(
                           onPressed: _submit,
                           child: Text(texts.auth.send),
                         ),
@@ -114,7 +118,7 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
 
   Future<void> _submit() async {
     if (ref.read(changePasswordControllerProvider).email.isEmpty) {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.theFieldCannotBeEmpty,
         color: Colors.orange,
@@ -126,14 +130,14 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
         .changePassword();
     if (!mounted) return;
     if (result == FirebaseResult.success) {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.emailSentSuccessfully,
         milliseconds: 4000,
       );
       context.pop();
     } else {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: result.toText(),
         color: Colors.orange,

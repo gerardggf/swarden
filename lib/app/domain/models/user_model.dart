@@ -3,11 +3,13 @@ import 'package:swarden/app/domain/enums/roles.dart';
 class UserModel {
   final String id;
   final String username;
+  final String email;
   final Roles role;
-  final String countryCode;
+  final String? countryCode;
 
   UserModel({
     required this.id,
+    required this.email,
     required this.username,
     required this.role,
     required this.countryCode,
@@ -18,12 +20,14 @@ class UserModel {
     String? username,
     Roles? role,
     String? countryCode,
+    String? email,
   }) =>
       UserModel(
         id: id ?? this.id,
         username: username ?? this.username,
         role: role ?? this.role,
         countryCode: countryCode ?? this.countryCode,
+        email: email ?? this.email,
       );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -31,6 +35,7 @@ class UserModel {
         username: json["username"] ?? '',
         role: stringToRole(json["role"]) ?? Roles.user,
         countryCode: json["countryCode"] ?? 'ES',
+        email: json["email"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,6 +43,7 @@ class UserModel {
         "username": username,
         "role": role,
         "countryCode": countryCode,
+        "email": email,
       };
 
   static Roles? stringToRole(String? role) {

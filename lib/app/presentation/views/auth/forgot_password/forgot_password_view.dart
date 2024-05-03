@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nebben/app/core/const/firebase_errors_extension.dart';
-import 'package:nebben/app/presentation/global/extensions/num_to_sizedbox.dart';
-import 'package:nebben/app/presentation/views/auth/forgot_password/forgot_password_controller.dart';
-
+import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import '../../../../core/const/assets.dart';
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
-import '../../../../domain/enums.dart';
-import '../../../global/dialogs.dart';
-import '../../../global/widgets/nebben_button.dart';
+import '../../../../domain/enums/firebase_results.dart';
+import '../../../global/dialogs/dialogs.dart';
 import '../register/register_view.dart';
-
-//TODO: implementar wip google i apple singnin
+import 'forgot_password_controller.dart';
 
 class ForgotPasswordView extends ConsumerStatefulWidget {
   const ForgotPasswordView({super.key});
@@ -81,7 +77,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                         },
                       ),
                       40.h,
-                      NebbenButton(
+                      ElevatedButton(
                         onPressed: _submit,
                         child: Text(texts.auth.send),
                       ),
@@ -106,7 +102,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                         child: Text(
                           texts.auth.signIn,
                           style: const TextStyle(
-                            color: AppColors.logo,
+                            color: AppColors.light,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
@@ -133,7 +129,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                         child: Text(
                           texts.auth.register,
                           style: const TextStyle(
-                            color: AppColors.logo,
+                            color: AppColors.light,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
@@ -165,7 +161,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
 
   Future<void> _submit() async {
     if (ref.read(forgotPasswordControllerProvider).email.isEmpty) {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.theFieldCannotBeEmpty,
         color: Colors.orange,
@@ -177,14 +173,14 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         .forgotPassword();
     if (!mounted) return;
     if (result == FirebaseResult.success) {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.emailSentSuccessfully,
         milliseconds: 4000,
       );
       context.pop();
     } else {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: result.toText(),
         color: Colors.orange,

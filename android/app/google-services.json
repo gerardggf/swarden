@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "901714219814",
+    "project_id": "swarden-809a5",
+    "storage_bucket": "swarden-809a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901714219814:android:6afc2d7db9ee33806427e7",
+        "android_client_info": {
+          "package_name": "com.example.swarden"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4e0VHTJVg5qNzk9g--kQQqUD5xgDA2zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

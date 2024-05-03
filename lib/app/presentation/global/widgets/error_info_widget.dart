@@ -28,7 +28,7 @@ class ErrorInfoWidget extends StatelessWidget {
                 ),
             15.h,
             Text(
-              text ?? 'An error has occured',
+              text ?? texts.global.anErrorHasOccurred,
               style: const TextStyle(
                 color: Colors.red,
                 fontSize: 16,

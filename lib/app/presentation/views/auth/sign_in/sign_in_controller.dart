@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nebben/app/domain/either/either.dart';
-import 'package:nebben/app/domain/enums.dart';
-import 'package:nebben/app/domain/models/user_model.dart';
-import 'package:nebben/app/domain/repositories/authentication_repository.dart';
 
+import '../../../../domain/either/either.dart';
+import '../../../../domain/enums/firebase_results.dart';
+import '../../../../domain/models/user_model.dart';
+import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/sign_in_state.dart';
 
 final signInControllerProvider =

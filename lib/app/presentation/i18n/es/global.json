@@ -1,1 +1,5 @@
-{}
+{
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "anErrorHasOccurred": "Se ha producido un error"
+}

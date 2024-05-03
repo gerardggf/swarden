@@ -2,16 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nebben/app/core/const/firebase_errors_extension.dart';
-import 'package:nebben/app/core/const/global.dart';
-import 'package:nebben/app/presentation/global/dialogs.dart';
-import 'package:nebben/app/presentation/global/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../../../core/const/colors.dart';
+import '../../../../../core/const/urls.dart';
 import '../../../../../core/generated/translations.g.dart';
+import '../../../../global/dialogs/dialogs.dart';
 import '../../../../global/functions/launch_url.dart';
 import '../../../../global/functions/validators.dart';
-import '../../../../global/widgets/nebben_button.dart';
 import '../register_controller.dart';
 
 class CompanyRegisterWidget extends ConsumerStatefulWidget {
@@ -148,7 +147,7 @@ class _CompanyRegisterWidgetState extends ConsumerState<CompanyRegisterWidget> {
                           text: '${texts.auth.legalConditions}*',
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              launchCustomUrl(Urls.termsOfService);
+                              launchCustomUrl(Urls.privacyPolicy);
                             },
                           style: const TextStyle(
                             decoration: TextDecoration.underline,
@@ -201,7 +200,7 @@ class _CompanyRegisterWidgetState extends ConsumerState<CompanyRegisterWidget> {
                 ),
               )
             else
-              NebbenButton(
+              ElevatedButton(
                 onPressed: _submit,
                 child: Text(texts.auth.register),
               ),
@@ -224,7 +223,7 @@ class _CompanyRegisterWidgetState extends ConsumerState<CompanyRegisterWidget> {
                     child: Text(
                       texts.auth.signIn,
                       style: const TextStyle(
-                        color: AppColors.logo,
+                        color: AppColors.light,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -267,7 +266,7 @@ class _CompanyRegisterWidgetState extends ConsumerState<CompanyRegisterWidget> {
       return;
     }
     if (!ref.read(registerControllerProvider).acceptsPolicy) {
-      NebbenDialogs.snackBar(
+      SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.youMustAcceptThePrivacyPolicy,
         color: Colors.orange,
@@ -283,14 +282,14 @@ class _CompanyRegisterWidgetState extends ConsumerState<CompanyRegisterWidget> {
 
     result.when(
       left: (failure) {
-        NebbenDialogs.snackBar(
+        SWardenDialogs.snackBar(
           context: context,
           text: failure.toText(),
           color: Colors.orange,
         );
       },
       right: (right) {
-        NebbenDialogs.snackBar(
+        SWardenDialogs.snackBar(
           context: context,
           text: texts.auth.accountCreated,
         );

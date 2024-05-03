@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nebben/app/presentation/global/extensions/num_to_sizedbox.dart';
-import 'package:nebben/app/presentation/views/auth/register/register_controller.dart';
-import 'package:nebben/app/presentation/views/auth/register/widgets/company_register_widget.dart';
-import 'package:nebben/app/presentation/views/auth/register/widgets/particular_register_widget.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
+import 'register_controller.dart';
+import 'widgets/company_register_widget.dart';
+import 'widgets/particular_register_widget.dart';
 
 class RegisterView extends ConsumerStatefulWidget {
   const RegisterView({super.key});

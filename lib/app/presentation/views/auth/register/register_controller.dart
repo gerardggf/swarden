@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nebben/app/domain/enums.dart';
-import 'package:nebben/app/domain/repositories/authentication_repository.dart';
-import 'package:nebben/app/presentation/views/auth/register/state/register_state.dart';
 
 import '../../../../domain/either/either.dart';
+import '../../../../domain/enums/firebase_results.dart';
 import '../../../../domain/models/user_model.dart';
+import '../../../../domain/repositories/authentication_repository.dart';
+import 'state/register_state.dart';
 
 final registerControllerProvider =
     StateNotifierProvider<RegisterController, RegisterState>(
