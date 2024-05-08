@@ -54,8 +54,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                     children: [
                       if (state.fetching)
                         const SizedBox(
-                          height: 60,
-                          width: 60,
+                          height: 70,
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: CircularProgressIndicator(
@@ -66,8 +65,7 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                       else
                         Image.asset(
                           Assets.logo,
-                          height: 60,
-                          width: 60,
+                          height: 70,
                         ),
                       20.h,
                       Text(
