@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/presentation/global/widgets/swarden_button.dart';
 
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
@@ -86,7 +87,7 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
                           },
                         ),
                         40.h,
-                        ElevatedButton(
+                        SwardenButton(
                           onPressed: _submit,
                           child: Text(texts.auth.send),
                         ),

@@ -8,6 +8,7 @@ import '../../../../core/const/assets.dart';
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
 import '../../../global/dialogs/dialogs.dart';
+import '../../../global/widgets/swarden_button.dart';
 import '../auth_view.dart';
 import '../forgot_password/forgot_password_view.dart';
 import '../register/register_view.dart';
@@ -66,8 +67,6 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                       else
                         Image.asset(
                           Assets.logo,
-                          height: 60,
-                          width: 60,
                         ),
                       20.h,
                       Text(
@@ -108,11 +107,15 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                       },
                     ),
                     40.h,
-                    ElevatedButton(
+                    SwardenButton(
                       onPressed: _submit,
-                      child: Text(
-                        texts.auth.signIn,
-                      ),
+                      child: state.fetching
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              texts.auth.signIn,
+                            ),
                     ),
                     15.h,
                     TextButton(

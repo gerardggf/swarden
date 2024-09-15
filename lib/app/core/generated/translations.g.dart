@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 165 (55 per locale)
+/// Strings: 168 (56 per locale)
 ///
-/// Built on 2024-05-03 at 11:22 UTC
+/// Built on 2024-09-15 at 11:49 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -149,20 +149,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
-	late final _TranslationsGlobalEn global = _TranslationsGlobalEn._(_root);
 	late final _TranslationsAuthEn auth = _TranslationsAuthEn._(_root);
-}
-
-// Path: global
-class _TranslationsGlobalEn {
-	_TranslationsGlobalEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get cancel => 'Cancel';
-	String get confirm => 'Confirm';
-	String get anErrorHasOccurred => 'An error has occurred';
+	late final _TranslationsGlobalEn global = _TranslationsGlobalEn._(_root);
 }
 
 // Path: auth
@@ -224,6 +212,19 @@ class _TranslationsAuthEn {
 	String get youHaveLoggedOut => 'You have logged out';
 	String get weWillSendYouAnEmailFromWhichYouCanChangeYourPassword => 'We will send you an email from which you can change your password';
 	String get changePassword => 'Change password';
+	String get logout => 'Logout';
+}
+
+// Path: global
+class _TranslationsGlobalEn {
+	_TranslationsGlobalEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get cancel => 'Cancel';
+	String get confirm => 'Confirm';
+	String get anErrorHasOccurred => 'An error has occurred';
 }
 
 // Path: <root>
@@ -250,20 +251,8 @@ class _TranslationsCa implements Translations {
 	@override late final _TranslationsCa _root = this; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsGlobalCa global = _TranslationsGlobalCa._(_root);
 	@override late final _TranslationsAuthCa auth = _TranslationsAuthCa._(_root);
-}
-
-// Path: global
-class _TranslationsGlobalCa implements _TranslationsGlobalEn {
-	_TranslationsGlobalCa._(this._root);
-
-	@override final _TranslationsCa _root; // ignore: unused_field
-
-	// Translations
-	@override String get cancel => 'Cancel·lar';
-	@override String get confirm => 'Confirmar';
-	@override String get anErrorHasOccurred => 'S\'ha produït un error';
+	@override late final _TranslationsGlobalCa global = _TranslationsGlobalCa._(_root);
 }
 
 // Path: auth
@@ -325,6 +314,19 @@ class _TranslationsAuthCa implements _TranslationsAuthEn {
 	@override String get youHaveLoggedOut => 'S\'ha tancat la sessió';
 	@override String get weWillSendYouAnEmailFromWhichYouCanChangeYourPassword => 'T\'enviarem un correu electrònic perquè puguis canviar la teva contrasenya';
 	@override String get changePassword => 'Canvia la contrasenya';
+	@override String get logout => 'Tancar sessió';
+}
+
+// Path: global
+class _TranslationsGlobalCa implements _TranslationsGlobalEn {
+	_TranslationsGlobalCa._(this._root);
+
+	@override final _TranslationsCa _root; // ignore: unused_field
+
+	// Translations
+	@override String get cancel => 'Cancel·lar';
+	@override String get confirm => 'Confirmar';
+	@override String get anErrorHasOccurred => 'S\'ha produït un error';
 }
 
 // Path: <root>
@@ -351,20 +353,8 @@ class _TranslationsEs implements Translations {
 	@override late final _TranslationsEs _root = this; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsGlobalEs global = _TranslationsGlobalEs._(_root);
 	@override late final _TranslationsAuthEs auth = _TranslationsAuthEs._(_root);
-}
-
-// Path: global
-class _TranslationsGlobalEs implements _TranslationsGlobalEn {
-	_TranslationsGlobalEs._(this._root);
-
-	@override final _TranslationsEs _root; // ignore: unused_field
-
-	// Translations
-	@override String get cancel => 'Cancelar';
-	@override String get confirm => 'Confirmar';
-	@override String get anErrorHasOccurred => 'Se ha producido un error';
+	@override late final _TranslationsGlobalEs global = _TranslationsGlobalEs._(_root);
 }
 
 // Path: auth
@@ -426,6 +416,19 @@ class _TranslationsAuthEs implements _TranslationsAuthEn {
 	@override String get youHaveLoggedOut => 'Sesión cerrada';
 	@override String get weWillSendYouAnEmailFromWhichYouCanChangeYourPassword => 'Te enviaremos un correo electrónico desde donde podras cambiar tu contraseña';
 	@override String get changePassword => 'Cambia la contraseña';
+	@override String get logout => 'Cerrar sesión';
+}
+
+// Path: global
+class _TranslationsGlobalEs implements _TranslationsGlobalEn {
+	_TranslationsGlobalEs._(this._root);
+
+	@override final _TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get cancel => 'Cancelar';
+	@override String get confirm => 'Confirmar';
+	@override String get anErrorHasOccurred => 'Se ha producido un error';
 }
 
 /// Flat map(s) containing all translations.
@@ -434,9 +437,6 @@ class _TranslationsAuthEs implements _TranslationsAuthEn {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'global.cancel': return 'Cancel';
-			case 'global.confirm': return 'Confirm';
-			case 'global.anErrorHasOccurred': return 'An error has occurred';
 			case 'auth.welcome': return 'Welcome!';
 			case 'auth.welcomeBack': return 'Welcome back!';
 			case 'auth.getStartedWith': return 'Get started with';
@@ -489,6 +489,10 @@ extension on Translations {
 			case 'auth.youHaveLoggedOut': return 'You have logged out';
 			case 'auth.weWillSendYouAnEmailFromWhichYouCanChangeYourPassword': return 'We will send you an email from which you can change your password';
 			case 'auth.changePassword': return 'Change password';
+			case 'auth.logout': return 'Logout';
+			case 'global.cancel': return 'Cancel';
+			case 'global.confirm': return 'Confirm';
+			case 'global.anErrorHasOccurred': return 'An error has occurred';
 			default: return null;
 		}
 	}
@@ -497,9 +501,6 @@ extension on Translations {
 extension on _TranslationsCa {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'global.cancel': return 'Cancel·lar';
-			case 'global.confirm': return 'Confirmar';
-			case 'global.anErrorHasOccurred': return 'S\'ha produït un error';
 			case 'auth.welcome': return 'Benvingut/da!';
 			case 'auth.welcomeBack': return 'Benvingut/da de nou!';
 			case 'auth.getStartedWith': return 'Registrar-se';
@@ -552,6 +553,10 @@ extension on _TranslationsCa {
 			case 'auth.youHaveLoggedOut': return 'S\'ha tancat la sessió';
 			case 'auth.weWillSendYouAnEmailFromWhichYouCanChangeYourPassword': return 'T\'enviarem un correu electrònic perquè puguis canviar la teva contrasenya';
 			case 'auth.changePassword': return 'Canvia la contrasenya';
+			case 'auth.logout': return 'Tancar sessió';
+			case 'global.cancel': return 'Cancel·lar';
+			case 'global.confirm': return 'Confirmar';
+			case 'global.anErrorHasOccurred': return 'S\'ha produït un error';
 			default: return null;
 		}
 	}
@@ -560,9 +565,6 @@ extension on _TranslationsCa {
 extension on _TranslationsEs {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'global.cancel': return 'Cancelar';
-			case 'global.confirm': return 'Confirmar';
-			case 'global.anErrorHasOccurred': return 'Se ha producido un error';
 			case 'auth.welcome': return '¡Bienvenido/a!';
 			case 'auth.welcomeBack': return '¡Bienvenido/a de nuevo!';
 			case 'auth.getStartedWith': return 'Registrarse con';
@@ -615,6 +617,10 @@ extension on _TranslationsEs {
 			case 'auth.youHaveLoggedOut': return 'Sesión cerrada';
 			case 'auth.weWillSendYouAnEmailFromWhichYouCanChangeYourPassword': return 'Te enviaremos un correo electrónico desde donde podras cambiar tu contraseña';
 			case 'auth.changePassword': return 'Cambia la contraseña';
+			case 'auth.logout': return 'Cerrar sesión';
+			case 'global.cancel': return 'Cancelar';
+			case 'global.confirm': return 'Confirmar';
+			case 'global.anErrorHasOccurred': return 'Se ha producido un error';
 			default: return null;
 		}
 	}

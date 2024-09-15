@@ -8,6 +8,7 @@ import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
 import '../../../../domain/enums/firebase_results.dart';
 import '../../../global/dialogs/dialogs.dart';
+import '../../../global/widgets/swarden_button.dart';
 import '../register/register_view.dart';
 import 'forgot_password_controller.dart';
 
@@ -48,8 +49,6 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                       children: [
                         Image.asset(
                           Assets.logo,
-                          height: 60,
-                          width: 60,
                         ),
                         30.h,
                         Text(
@@ -77,7 +76,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                         },
                       ),
                       40.h,
-                      ElevatedButton(
+                      SwardenButton(
                         onPressed: _submit,
                         child: Text(texts.auth.send),
                       ),

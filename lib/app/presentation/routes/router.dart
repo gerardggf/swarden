@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/presentation/swarden_app.dart';
 
+import '../../domain/models/pswd_item_model.dart';
 import '../views/auth/auth_view.dart';
 import '../views/auth/change_password/change_password_view.dart';
 import '../views/auth/forgot_password/forgot_password_view.dart';
@@ -9,6 +10,7 @@ import '../views/auth/register/register_view.dart';
 import '../views/auth/sign_in/sign_in_view.dart';
 import '../views/home/home_view.dart';
 import '../views/profile/profile_view.dart';
+import '../views/pswd_item/pswd_item_view.dart';
 import '../views/splash_view.dart';
 
 mixin RoutesMixin on State<SWardenApp> {
@@ -53,6 +55,12 @@ mixin RoutesMixin on State<SWardenApp> {
         name: ProfileView.routeName,
         path: '/profile',
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        name: PswdItemView.routeName,
+        path: '/pswd-item',
+        builder: (context, state) =>
+            PswdItemView(state.extra! as PswdItemModel),
       ),
     ],
   );
