@@ -5,6 +5,7 @@ class PswdItemModel {
   final String id;
   final String username;
   final String pswd;
+  final String? url;
   final Timestamp creationDate;
   final Timestamp lastUpdated;
 
@@ -15,6 +16,7 @@ class PswdItemModel {
     required this.pswd,
     required this.creationDate,
     required this.lastUpdated,
+    required this.url,
   });
 
   PswdItemModel copyWith({
@@ -24,6 +26,7 @@ class PswdItemModel {
     String? pswd,
     Timestamp? creationDate,
     Timestamp? lastUpdated,
+    String? url,
   }) =>
       PswdItemModel(
         name: name ?? this.name,
@@ -32,6 +35,7 @@ class PswdItemModel {
         pswd: pswd ?? this.pswd,
         creationDate: creationDate ?? this.creationDate,
         lastUpdated: lastUpdated ?? this.lastUpdated,
+        url: url ?? this.url,
       );
 
   factory PswdItemModel.fromJson(Map<String, dynamic> json) => PswdItemModel(
@@ -41,6 +45,7 @@ class PswdItemModel {
         pswd: json["pswd"],
         creationDate: json["creationDate"],
         lastUpdated: json["lastUpdated"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +55,6 @@ class PswdItemModel {
         "pswd": pswd,
         "creationDate": creationDate,
         "lastUpdated": lastUpdated,
+        "url": url,
       };
 }

@@ -1,5 +1,7 @@
 {
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "anErrorHasOccurred": "An error has occurred"
+    "anErrorHasOccurred": "An error has occurred",
+    "createdOn": "Created on",
+    "lastModified": "Last modified"
 }

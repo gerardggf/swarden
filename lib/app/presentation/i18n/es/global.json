@@ -1,5 +1,7 @@
 {
     "cancel": "Cancelar",
     "confirm": "Confirmar",
-    "anErrorHasOccurred": "Se ha producido un error"
+    "anErrorHasOccurred": "Se ha producido un error",
+    "createdOn": "Creado el",
+    "lastModified": "Modificado el"
 }

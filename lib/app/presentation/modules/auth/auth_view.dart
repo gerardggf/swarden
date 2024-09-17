@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:swarden/app/presentation/views/auth/sign_in/sign_in_view.dart';
+import 'package:swarden/app/presentation/modules/auth/sign_in/sign_in_view.dart';
 
 import '../../global/widgets/error_info_widget.dart';
 import '../../global/widgets/loading_widget.dart';

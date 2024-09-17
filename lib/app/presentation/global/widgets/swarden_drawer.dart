@@ -21,14 +21,18 @@ class SWardenDrawer extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  CircleAvatar(
-                    radius: 30,
-                    child: Image.asset(Assets.icon),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.asset(
+                      Assets.icon,
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
                   10.w,
                   Expanded(
                     child: Text(
-                      ref.watch(sessionControllerProvider)?.username ?? '',
+                      ref.watch(sessionControllerProvider)?.username ?? '-',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

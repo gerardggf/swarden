@@ -100,6 +100,7 @@ class AccountRepositoryImpl implements AccountRepository {
               pswd: pswd,
               creationDate: Timestamp.now(),
               lastUpdated: Timestamp.now(),
+              url: 'www.google.com',
             ).toJson(),
           );
       return true;

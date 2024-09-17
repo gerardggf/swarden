@@ -3,15 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:swarden/app/presentation/swarden_app.dart';
 
 import '../../domain/models/pswd_item_model.dart';
-import '../views/auth/auth_view.dart';
-import '../views/auth/change_password/change_password_view.dart';
-import '../views/auth/forgot_password/forgot_password_view.dart';
-import '../views/auth/register/register_view.dart';
-import '../views/auth/sign_in/sign_in_view.dart';
-import '../views/home/home_view.dart';
-import '../views/profile/profile_view.dart';
-import '../views/pswd_item/pswd_item_view.dart';
-import '../views/splash_view.dart';
+import '../modules/add_pswd_item/add_pswd_item_view.dart';
+import '../modules/auth/auth_view.dart';
+import '../modules/auth/change_password/change_password_view.dart';
+import '../modules/auth/forgot_password/forgot_password_view.dart';
+import '../modules/auth/register/register_view.dart';
+import '../modules/auth/sign_in/sign_in_view.dart';
+import '../modules/home/home_view.dart';
+import '../modules/profile/profile_view.dart';
+import '../modules/pswd_item/pswd_item_view.dart';
+import '../modules/splash_view.dart';
 
 mixin RoutesMixin on State<SWardenApp> {
   final router = GoRouter(
@@ -62,6 +63,10 @@ mixin RoutesMixin on State<SWardenApp> {
         builder: (context, state) =>
             PswdItemView(state.extra! as PswdItemModel),
       ),
+      GoRoute(
+          name: AddPswdItemView.routeName,
+          path: '/add-pswd-item',
+          builder: (context, state) => const AddPswdItemView()),
     ],
   );
 }

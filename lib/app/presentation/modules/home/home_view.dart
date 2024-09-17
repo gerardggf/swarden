@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/const/global.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/domain/repositories/account_repository.dart';
-import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
 import 'package:swarden/app/presentation/global/widgets/loading_widget.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_drawer.dart';
-import 'package:swarden/app/presentation/views/pswd_item/pswd_item_view.dart';
+import 'package:swarden/app/presentation/modules/add_pswd_item/add_pswd_item_view.dart';
 
 import '../../../domain/either/either.dart';
 import '../../../domain/models/pswd_item_model.dart';
 import '../../global/widgets/error_info_widget.dart';
+import 'widgets/pswd_item_tile_widget.dart';
 
 final pswdItemsStreamProvider =
     StreamProvider<Either<Exception, List<PswdItemModel>>>(
@@ -37,6 +37,14 @@ class _HomeViewState extends ConsumerState<HomeView> {
       drawer: const SWardenDrawer(),
       appBar: AppBar(
         title: const Text(Global.appName),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.pushNamed(AddPswdItemView.routeName);
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: pswdItemsStream.when(
         data: (pswdItemsEither) {
@@ -55,7 +63,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       TextButton.icon(
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          addPswdItem();
+                          context.pushNamed(AddPswdItemView.routeName);
                         },
                         label: const Text('Add item'),
                       ),
@@ -64,32 +72,11 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 );
               }
               return ListView.builder(
-                itemCount: pswdItems.length + 1,
+                itemCount: pswdItems.length,
                 itemBuilder: (context, index) {
-                  if (index == pswdItems.length) {
-                    return ListTile(
-                      leading: const Icon(Icons.add),
-                      title: const Text('Add pswd item'),
-                      onTap: () async {
-                        addPswdItem();
-                      },
-                    );
-                  }
                   final pswdItem = pswdItems[index];
-                  return ListTile(
-                    leading: const Icon(Icons.password),
-                    title: Text(pswdItem.name),
-                    onLongPress: () {
-                      ref.read(accountRepositoryProvider).deletePswdItem(
-                            pswdItem.id,
-                          );
-                    },
-                    onTap: () {
-                      context.pushNamed(
-                        PswdItemView.routeName,
-                        extra: pswdItem,
-                      );
-                    },
+                  return PswdItemTileWidget(
+                    pswdItem: pswdItem,
                   );
                 },
               );
@@ -104,23 +91,5 @@ class _HomeViewState extends ConsumerState<HomeView> {
         },
       ),
     );
-  }
-
-  Future<void> addPswdItem() async {
-    final result = await ref.read(accountRepositoryProvider).addPswdItem(
-          name: 'eee',
-          username: 'eeee@eee.ee',
-          pswd: 'ee1ee1ee1e',
-        );
-    if (!mounted) return;
-    if (result) {
-      SWardenDialogs.snackBar(context: context, text: 'Password added');
-    } else {
-      SWardenDialogs.snackBar(
-        context: context,
-        text: 'Something went wrong',
-        color: Colors.red,
-      );
-    }
   }
 }

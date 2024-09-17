@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 168 (56 per locale)
+/// Strings: 174 (58 per locale)
 ///
-/// Built on 2024-09-15 at 11:49 UTC
+/// Built on 2024-09-17 at 17:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -225,6 +225,8 @@ class _TranslationsGlobalEn {
 	String get cancel => 'Cancel';
 	String get confirm => 'Confirm';
 	String get anErrorHasOccurred => 'An error has occurred';
+	String get createdOn => 'Created on';
+	String get lastModified => 'Last modified';
 }
 
 // Path: <root>
@@ -327,6 +329,8 @@ class _TranslationsGlobalCa implements _TranslationsGlobalEn {
 	@override String get cancel => 'Cancel·lar';
 	@override String get confirm => 'Confirmar';
 	@override String get anErrorHasOccurred => 'S\'ha produït un error';
+	@override String get createdOn => 'Creat el';
+	@override String get lastModified => 'Modificat el';
 }
 
 // Path: <root>
@@ -429,6 +433,8 @@ class _TranslationsGlobalEs implements _TranslationsGlobalEn {
 	@override String get cancel => 'Cancelar';
 	@override String get confirm => 'Confirmar';
 	@override String get anErrorHasOccurred => 'Se ha producido un error';
+	@override String get createdOn => 'Creado el';
+	@override String get lastModified => 'Modificado el';
 }
 
 /// Flat map(s) containing all translations.
@@ -493,6 +499,8 @@ extension on Translations {
 			case 'global.cancel': return 'Cancel';
 			case 'global.confirm': return 'Confirm';
 			case 'global.anErrorHasOccurred': return 'An error has occurred';
+			case 'global.createdOn': return 'Created on';
+			case 'global.lastModified': return 'Last modified';
 			default: return null;
 		}
 	}
@@ -557,6 +565,8 @@ extension on _TranslationsCa {
 			case 'global.cancel': return 'Cancel·lar';
 			case 'global.confirm': return 'Confirmar';
 			case 'global.anErrorHasOccurred': return 'S\'ha produït un error';
+			case 'global.createdOn': return 'Creat el';
+			case 'global.lastModified': return 'Modificat el';
 			default: return null;
 		}
 	}
@@ -621,6 +631,8 @@ extension on _TranslationsEs {
 			case 'global.cancel': return 'Cancelar';
 			case 'global.confirm': return 'Confirmar';
 			case 'global.anErrorHasOccurred': return 'Se ha producido un error';
+			case 'global.createdOn': return 'Creado el';
+			case 'global.lastModified': return 'Modificado el';
 			default: return null;
 		}
 	}
