@@ -14,11 +14,9 @@ final accountRepositoryProvider = Provider<AccountRepository>(
 abstract class AccountRepository {
   Future<Either<Exception, List<PswdItemModel>>> getPswdItems();
   Stream<Either<Exception, List<PswdItemModel>>> subscribeToPswdItems();
-  Future<bool> addPswdItem({
-    required String name,
-    required String username,
-    required String pswd,
-  });
+  Future<bool> addPswdItem(
+    PswdItemModel pswditem,
+  );
   Future<bool> deletePswdItem(String itemId);
   Future<bool> updatePswdItem(PswdItemModel item);
 }

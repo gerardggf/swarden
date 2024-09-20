@@ -6,6 +6,7 @@ import 'package:swarden/app/core/extensions/date_extension.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
+import 'package:swarden/app/domain/repositories/authentication_repository.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
 
 import '../../../../domain/repositories/account_repository.dart';
@@ -35,7 +36,11 @@ class PswdItemTileWidget extends ConsumerWidget {
               );
         }
       },
-      onTap: () {
+      onTap: () async {
+        final authenticate = await ref
+            .read(authenticationRepositoryProvider)
+            .authenticateWithBiometrics();
+        if (!authenticate || !context.mounted) return;
         context.pushNamed(
           PswdItemView.routeName,
           extra: pswdItem,

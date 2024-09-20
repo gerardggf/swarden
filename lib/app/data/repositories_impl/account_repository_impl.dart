@@ -77,11 +77,7 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<bool> addPswdItem({
-    required String name,
-    required String username,
-    required String pswd,
-  }) async {
+  Future<bool> addPswdItem(PswdItemModel pswdItem) async {
     try {
       final userId = authRepository.currentUser?.uid;
       if (userId == null) {
@@ -93,15 +89,7 @@ class AccountRepositoryImpl implements AccountRepository {
           .collection(Collections.passwords);
       final docId = ref.doc().id;
       await ref.doc(docId).set(
-            PswdItemModel(
-              id: docId,
-              name: name,
-              username: username,
-              pswd: pswd,
-              creationDate: Timestamp.now(),
-              lastUpdated: Timestamp.now(),
-              url: 'www.google.com',
-            ).toJson(),
+            pswdItem.copyWith(id: docId).toJson(),
           );
       return true;
     } catch (e) {

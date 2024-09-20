@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/data/services/local/biometrics_service.dart';
 import 'package:swarden/app/domain/enums/roles.dart';
 
 import '../../core/const/collections.dart';
@@ -14,9 +15,11 @@ import '../../presentation/global/controllers/session_controller.dart';
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   AuthenticationRepositoryImpl(
     this.sessionController,
+    this.biometricsService,
   );
 
   final SessionController sessionController;
+  final BiometricsService biometricsService;
 
   @override
   User? get currentUser => FirebaseAuth.instance.currentUser;
@@ -180,5 +183,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       }
       return false;
     }
+  }
+
+  @override
+  Future<bool> authenticateWithBiometrics() async {
+    //is device supported and can be used biometrics?
+    final canCheckBiometrics = await biometricsService.canCheckBiometrics();
+    if (canCheckBiometrics) {
+      return await biometricsService.authenticate();
+    }
+    //return true if no biometric system is set
+    return true;
   }
 }

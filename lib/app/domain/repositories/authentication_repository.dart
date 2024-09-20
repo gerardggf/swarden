@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:swarden/app/data/services/local/biometrics_service.dart';
 
 import '../../data/repositories_impl/authentication_repository_impl.dart';
 import '../../presentation/global/controllers/session_controller.dart';
@@ -10,6 +11,7 @@ import '../models/user_model.dart';
 final authenticationRepositoryProvider = Provider<AuthenticationRepository>(
   (ref) => AuthenticationRepositoryImpl(
     ref.watch(sessionControllerProvider.notifier),
+    ref.watch(biometricsServiceProvider),
   ),
 );
 
@@ -35,4 +37,6 @@ abstract class AuthenticationRepository {
   User? get currentUser;
   Future<FirebaseResult> sendPasswordResetEmail(String email);
   Future<FirebaseResult> deleteUserAccount();
+
+  Future<bool> authenticateWithBiometrics();
 }
