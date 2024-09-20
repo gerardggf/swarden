@@ -73,10 +73,17 @@ class _HomeViewState extends ConsumerState<HomeView> {
               }
               return ListView.builder(
                 itemCount: pswdItems.length,
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final pswdItem = pswdItems[index];
-                  return PswdItemTileWidget(
-                    pswdItem: pswdItem,
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      top: index == 0 ? 10 : 0,
+                      bottom: index == pswdItems.length - 1 ? 20 : 0,
+                    ),
+                    child: PswdItemTileWidget(
+                      pswdItem: pswdItem,
+                    ),
                   );
                 },
               );

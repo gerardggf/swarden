@@ -22,7 +22,7 @@ class PswdItemTileWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
+    return InkWell(
       onLongPress: () async {
         //TODO:traducir
         final result = await SWardenDialogs.dialog(
@@ -48,7 +48,7 @@ class PswdItemTileWidget extends ConsumerWidget {
       },
       child: Container(
         padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(15).copyWith(bottom: 5),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -63,19 +63,17 @@ class PswdItemTileWidget extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 50,
               height: 50,
-              decoration: BoxDecoration(
-                color: Colors.black26,
-                borderRadius: BorderRadius.circular(20),
-              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: pswdItem.url == null
                     ? Image.asset(Assets.icon)
                     : Image.network(
-                        getFaviconUrl(pswdItem.url!),
+                        getFaviconUrl(
+                          pswdItem.url!,
+                        ),
                       ),
               ),
             ),
