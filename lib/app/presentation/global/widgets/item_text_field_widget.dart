@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/const/colors.dart';
+import '../../../core/const/colors.dart';
 
-class AddItemTextFieldWidget extends StatelessWidget {
-  const AddItemTextFieldWidget(
+class ItemTextFieldWidget extends StatelessWidget {
+  const ItemTextFieldWidget(
       {super.key, required this.controller, required this.label});
 
   final TextEditingController controller;

@@ -1,11 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swarden/app/data/services/local/crypto_service.dart';
 
+import '../../core/global_providers.dart';
 import '../../data/repositories_impl/pswd_repository_impl.dart';
 
 final pswdRepositoryProvider = Provider<PswdRepository>(
   (ref) => PswdRepositoryImpl(
-    //secureStorage: ref.watch(flutterSecureStorageProvider),
+    secureStorage: ref.watch(flutterSecureStorageProvider),
     cryptoService: ref.watch(cryptoServiceProvider),
   ),
 );

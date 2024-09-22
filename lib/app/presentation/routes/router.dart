@@ -9,6 +9,7 @@ import '../modules/auth/change_password/change_password_view.dart';
 import '../modules/auth/forgot_password/forgot_password_view.dart';
 import '../modules/auth/register/register_view.dart';
 import '../modules/auth/sign_in/sign_in_view.dart';
+import '../modules/edit_pswd_item/edit_pswd_item_view.dart';
 import '../modules/home/home_view.dart';
 import '../modules/profile/profile_view.dart';
 import '../modules/pswd_item/pswd_item_view.dart';
@@ -64,9 +65,16 @@ mixin RoutesMixin on State<SWardenApp> {
             PswdItemView(state.extra! as PswdItemModel),
       ),
       GoRoute(
-          name: AddPswdItemView.routeName,
-          path: '/add-pswd-item',
-          builder: (context, state) => const AddPswdItemView()),
+        name: AddPswdItemView.routeName,
+        path: '/add-pswd-item',
+        builder: (context, state) => const AddPswdItemView(),
+      ),
+      GoRoute(
+        name: EditPswdItemView.routeName,
+        path: '/edit-pswd-item',
+        builder: (context, state) =>
+            EditPswdItemView(state.extra as PswdItemModel),
+      ),
     ],
   );
 }

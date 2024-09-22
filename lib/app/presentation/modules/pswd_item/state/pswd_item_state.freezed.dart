@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'forgot_password_state.dart';
+part of 'pswd_item_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,49 +15,49 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ForgotPasswordState {
-  String get email => throw _privateConstructorUsedError;
+mixin _$PswdItemState {
+  bool get showPassword => throw _privateConstructorUsedError;
   bool get fetching => throw _privateConstructorUsedError;
 
-  /// Create a copy of ForgotPasswordState
+  /// Create a copy of PswdItemState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ForgotPasswordStateCopyWith<ForgotPasswordState> get copyWith =>
+  $PswdItemStateCopyWith<PswdItemState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ForgotPasswordStateCopyWith<$Res> {
-  factory $ForgotPasswordStateCopyWith(
-          ForgotPasswordState value, $Res Function(ForgotPasswordState) then) =
-      _$ForgotPasswordStateCopyWithImpl<$Res, ForgotPasswordState>;
+abstract class $PswdItemStateCopyWith<$Res> {
+  factory $PswdItemStateCopyWith(
+          PswdItemState value, $Res Function(PswdItemState) then) =
+      _$PswdItemStateCopyWithImpl<$Res, PswdItemState>;
   @useResult
-  $Res call({String email, bool fetching});
+  $Res call({bool showPassword, bool fetching});
 }
 
 /// @nodoc
-class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
-    implements $ForgotPasswordStateCopyWith<$Res> {
-  _$ForgotPasswordStateCopyWithImpl(this._value, this._then);
+class _$PswdItemStateCopyWithImpl<$Res, $Val extends PswdItemState>
+    implements $PswdItemStateCopyWith<$Res> {
+  _$PswdItemStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ForgotPasswordState
+  /// Create a copy of PswdItemState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? showPassword = null,
     Object? fetching = null,
   }) {
     return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
       fetching: null == fetching
           ? _value.fetching
           : fetching // ignore: cast_nullable_to_non_nullable
@@ -67,37 +67,37 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
 }
 
 /// @nodoc
-abstract class _$$ForgotPasswordStateImplCopyWith<$Res>
-    implements $ForgotPasswordStateCopyWith<$Res> {
-  factory _$$ForgotPasswordStateImplCopyWith(_$ForgotPasswordStateImpl value,
-          $Res Function(_$ForgotPasswordStateImpl) then) =
-      __$$ForgotPasswordStateImplCopyWithImpl<$Res>;
+abstract class _$$PswdItemStateImplCopyWith<$Res>
+    implements $PswdItemStateCopyWith<$Res> {
+  factory _$$PswdItemStateImplCopyWith(
+          _$PswdItemStateImpl value, $Res Function(_$PswdItemStateImpl) then) =
+      __$$PswdItemStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, bool fetching});
+  $Res call({bool showPassword, bool fetching});
 }
 
 /// @nodoc
-class __$$ForgotPasswordStateImplCopyWithImpl<$Res>
-    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$ForgotPasswordStateImpl>
-    implements _$$ForgotPasswordStateImplCopyWith<$Res> {
-  __$$ForgotPasswordStateImplCopyWithImpl(_$ForgotPasswordStateImpl _value,
-      $Res Function(_$ForgotPasswordStateImpl) _then)
+class __$$PswdItemStateImplCopyWithImpl<$Res>
+    extends _$PswdItemStateCopyWithImpl<$Res, _$PswdItemStateImpl>
+    implements _$$PswdItemStateImplCopyWith<$Res> {
+  __$$PswdItemStateImplCopyWithImpl(
+      _$PswdItemStateImpl _value, $Res Function(_$PswdItemStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ForgotPasswordState
+  /// Create a copy of PswdItemState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? showPassword = null,
     Object? fetching = null,
   }) {
-    return _then(_$ForgotPasswordStateImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$PswdItemStateImpl(
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
       fetching: null == fetching
           ? _value.fetching
           : fetching // ignore: cast_nullable_to_non_nullable
@@ -108,57 +108,57 @@ class __$$ForgotPasswordStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ForgotPasswordStateImpl implements _ForgotPasswordState {
-  _$ForgotPasswordStateImpl({this.email = '', this.fetching = false});
+class _$PswdItemStateImpl implements _PswdItemState {
+  _$PswdItemStateImpl({this.showPassword = false, this.fetching = false});
 
   @override
   @JsonKey()
-  final String email;
+  final bool showPassword;
   @override
   @JsonKey()
   final bool fetching;
 
   @override
   String toString() {
-    return 'ForgotPasswordState(email: $email, fetching: $fetching)';
+    return 'PswdItemState(showPassword: $showPassword, fetching: $fetching)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ForgotPasswordStateImpl &&
-            (identical(other.email, email) || other.email == email) &&
+            other is _$PswdItemStateImpl &&
+            (identical(other.showPassword, showPassword) ||
+                other.showPassword == showPassword) &&
             (identical(other.fetching, fetching) ||
                 other.fetching == fetching));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, fetching);
+  int get hashCode => Object.hash(runtimeType, showPassword, fetching);
 
-  /// Create a copy of ForgotPasswordState
+  /// Create a copy of PswdItemState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ForgotPasswordStateImplCopyWith<_$ForgotPasswordStateImpl> get copyWith =>
-      __$$ForgotPasswordStateImplCopyWithImpl<_$ForgotPasswordStateImpl>(
-          this, _$identity);
+  _$$PswdItemStateImplCopyWith<_$PswdItemStateImpl> get copyWith =>
+      __$$PswdItemStateImplCopyWithImpl<_$PswdItemStateImpl>(this, _$identity);
 }
 
-abstract class _ForgotPasswordState implements ForgotPasswordState {
-  factory _ForgotPasswordState({final String email, final bool fetching}) =
-      _$ForgotPasswordStateImpl;
+abstract class _PswdItemState implements PswdItemState {
+  factory _PswdItemState({final bool showPassword, final bool fetching}) =
+      _$PswdItemStateImpl;
 
   @override
-  String get email;
+  bool get showPassword;
   @override
   bool get fetching;
 
-  /// Create a copy of ForgotPasswordState
+  /// Create a copy of PswdItemState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ForgotPasswordStateImplCopyWith<_$ForgotPasswordStateImpl> get copyWith =>
+  _$$PswdItemStateImplCopyWith<_$PswdItemStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

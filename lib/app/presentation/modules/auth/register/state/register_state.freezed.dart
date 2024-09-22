@@ -28,7 +28,9 @@ mixin _$RegisterState {
   bool get acceptsPolicy => throw _privateConstructorUsedError;
   bool get acceptsMailing => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RegisterStateCopyWith<RegisterState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +65,8 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,6 +161,8 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
       _$RegisterStateImpl _value, $Res Function(_$RegisterStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -303,7 +309,9 @@ class _$RegisterStateImpl implements _RegisterState {
   int get hashCode => Object.hash(runtimeType, name, lastName, taxName, cif,
       address, city, email, password, fetching, acceptsPolicy, acceptsMailing);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RegisterStateImplCopyWith<_$RegisterStateImpl> get copyWith =>
@@ -346,8 +354,11 @@ abstract class _RegisterState implements RegisterState {
   bool get acceptsPolicy;
   @override
   bool get acceptsMailing;
+
+  /// Create a copy of RegisterState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RegisterStateImplCopyWith<_$RegisterStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

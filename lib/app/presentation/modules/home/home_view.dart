@@ -42,8 +42,12 @@ class _HomeViewState extends ConsumerState<HomeView> {
             onPressed: () {
               context.pushNamed(AddPswdItemView.routeName);
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(
+              Icons.add,
+              size: 32,
+            ),
           ),
+          10.w,
         ],
       ),
       body: pswdItemsStream.when(
@@ -72,6 +76,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 );
               }
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 itemCount: pswdItems.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {

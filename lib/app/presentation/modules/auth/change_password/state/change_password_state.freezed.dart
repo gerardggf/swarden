@@ -19,7 +19,9 @@ mixin _$ChangePasswordState {
   String get email => throw _privateConstructorUsedError;
   bool get fetching => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChangePasswordStateCopyWith<ChangePasswordState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$ChangePasswordStateCopyWithImpl<$Res, $Val extends ChangePasswordState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$ChangePasswordStateImplCopyWithImpl<$Res>
       $Res Function(_$ChangePasswordStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,7 +136,9 @@ class _$ChangePasswordStateImpl implements _ChangePasswordState {
   @override
   int get hashCode => Object.hash(runtimeType, email, fetching);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChangePasswordStateImplCopyWith<_$ChangePasswordStateImpl> get copyWith =>
@@ -146,8 +154,11 @@ abstract class _ChangePasswordState implements ChangePasswordState {
   String get email;
   @override
   bool get fetching;
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChangePasswordStateImplCopyWith<_$ChangePasswordStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

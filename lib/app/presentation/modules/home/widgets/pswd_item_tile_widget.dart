@@ -10,6 +10,7 @@ import 'package:swarden/app/domain/repositories/authentication_repository.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
 
 import '../../../../domain/repositories/account_repository.dart';
+import '../../../global/functions/urls_functions.dart';
 import '../../pswd_item/pswd_item_view.dart';
 
 class PswdItemTileWidget extends ConsumerWidget {
@@ -27,13 +28,24 @@ class PswdItemTileWidget extends ConsumerWidget {
         //TODO:traducir
         final result = await SWardenDialogs.dialog(
           context: context,
-          title: 'Eliiminar registro',
-          content: const Text('Quieres eliminar este registro?'),
+          title: 'Eliminar registro',
+          content: const Text('¿Quieres eliminar este registro?'),
         );
-        if (result == true) {
+        if (result != true || !context.mounted) return;
+        final result2 = await SWardenDialogs.dialog(
+          context: context,
+          title: 'Eliminar registro',
+          content: const Text('¿Estás seguro/a?'),
+        );
+        if (result2 == true) {
           ref.read(accountRepositoryProvider).deletePswdItem(
                 pswdItem.id,
               );
+          if (!context.mounted) return;
+          SWardenDialogs.snackBar(
+            context: context,
+            text: 'Contraseña eliminada',
+          );
         }
       },
       onTap: () async {
@@ -50,7 +62,7 @@ class PswdItemTileWidget extends ConsumerWidget {
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -99,13 +111,5 @@ class PswdItemTileWidget extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  String getFaviconUrl(String url) {
-    Uri uri = Uri.parse(url);
-    if (uri.scheme.isEmpty) {
-      uri = Uri.parse('https://$url');
-    }
-    return '${uri.scheme}://${uri.host}/favicon.ico';
   }
 }
