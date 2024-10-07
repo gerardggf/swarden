@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/either/either.dart';
-import '../../../../domain/enums/firebase_results.dart';
+import '../../../../domain/firebase_response/firebase_response.dart';
 import '../../../../domain/models/user_model.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/sign_in_state.dart';
@@ -31,7 +31,7 @@ class SignInController extends StateNotifier<SignInState> {
     state = state.copyWith(fetching: value);
   }
 
-  Future<Either<FirebaseResult, UserModel>> signIn() async {
+  Future<Either<FirebaseResponse, UserModel>> signIn() async {
     updateFetching(true);
     final result = authenticationRepository.signIn(
       state.email,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../../core/const/assets.dart';

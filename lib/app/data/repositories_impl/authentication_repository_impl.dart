@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
+import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/data/services/local/biometrics_service.dart';
 import 'package:swarden/app/domain/enums/roles.dart';
 
 import '../../core/const/collections.dart';
 import '../../domain/either/either.dart';
-import '../../domain/enums/firebase_results.dart';
+import '../../domain/firebase_response/firebase_response.dart';
 import '../../domain/models/user_model.dart';
 import '../../domain/repositories/authentication_repository.dart';
 import '../../presentation/global/controllers/session_controller.dart';
@@ -25,7 +26,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   User? get currentUser => FirebaseAuth.instance.currentUser;
 
   @override
-  Future<Either<FirebaseResult, UserModel>> signIn(
+  Future<Either<FirebaseResponse, UserModel>> signIn(
     String email,
     String password,
   ) async {
@@ -33,28 +34,28 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       final credentials = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       if (credentials.user == null) {
-        return Either.left(FirebaseResult.noCredentials);
+        return Either.left(const FirebaseResponse.noCredentials());
       }
       final doc = await FirebaseFirestore.instance
           .collection(Collections.users)
           .doc(credentials.user!.uid)
           .get();
       if (doc.data() == null) {
-        return Either.left(FirebaseResult.noData);
+        return Either.left(const FirebaseResponse.noData());
       }
       final user = UserModel.fromJson(doc.data()!);
       sessionController.setUser(user);
       return Either.right(user);
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return Either.left(e.code.toFirebaseResult());
+      return Either.left(e.code.toFirebaseResponse());
     } catch (e) {
-      return Either.left(FirebaseResult.undefined);
+      return Either.left(FirebaseResponse.undefined(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<FirebaseResult, UserModel>> register({
+  Future<Either<FirebaseResponse, UserModel>> register({
     required String email,
     required String name,
     required String lastName,
@@ -72,7 +73,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         password: password,
       );
       if (credentials.user == null) {
-        return Either.left(FirebaseResult.noCredentials);
+        return Either.left(const FirebaseResponse.noCredentials());
       }
 
       final userToCreate = UserModel(
@@ -101,10 +102,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return Either.left(e.code.toFirebaseResult());
+      return Either.left(e.code.toFirebaseResponse());
     } catch (e) {
       debugPrint(e.toString());
-      return Either.left(FirebaseResult.undefined);
+      return Either.left(FirebaseResponse.undefined(message: e.toString()));
     }
   }
 
@@ -135,38 +136,39 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<FirebaseResult> sendPasswordResetEmail(String email) async {
+  Future<FirebaseResponse> sendPasswordResetEmail(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      return FirebaseResult.success;
+      return const FirebaseResponse.success();
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return e.code.toFirebaseResult();
+      return e.code.toFirebaseResponse();
     } catch (e) {
       debugPrint(e.toString());
-      return FirebaseResult.undefined;
+      return FirebaseResponse.undefined(message: e.toString());
     }
   }
 
   //Delte user account ---------------------------------------------
 
   @override
-  Future<FirebaseResult> deleteUserAccount() async {
-    if (currentUser == null) return FirebaseResult.noCredentials;
+  Future<FirebaseResponse> deleteUserAccount() async {
+    if (currentUser == null) return const FirebaseResponse.noCredentials();
     try {
       final result = await _deleteFirestoreUser(currentUser!.uid);
       if (result) {
         await currentUser!.delete();
-        return FirebaseResult.success;
+        return const FirebaseResponse.success();
       } else {
-        return FirebaseResult.undefined;
+        return FirebaseResponse.undefined(
+            message: texts.global.anErrorHasOccurred);
       }
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return e.code.toFirebaseResult();
+      return e.code.toFirebaseResponse();
     } catch (e) {
       debugPrint(e.toString());
-      return FirebaseResult.undefined;
+      return FirebaseResponse.undefined(message: e.toString());
     }
   }
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:swarden/app/core/extensions/firebase_results_extensions.dart';
+import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import '../../../../core/const/assets.dart';
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
-import '../../../../domain/enums/firebase_results.dart';
+import '../../../../domain/firebase_response/firebase_response.dart';
 import '../../../global/dialogs/dialogs.dart';
 import '../../../global/widgets/swarden_button.dart';
 import '../register/register_view.dart';
@@ -171,7 +171,7 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
         .read(forgotPasswordControllerProvider.notifier)
         .forgotPassword();
     if (!mounted) return;
-    if (result == FirebaseResult.success) {
+    if (result == const FirebaseResponse.success()) {
       SWardenDialogs.snackBar(
         context: context,
         text: texts.auth.emailSentSuccessfully,

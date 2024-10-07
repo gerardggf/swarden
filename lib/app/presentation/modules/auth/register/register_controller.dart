@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain/either/either.dart';
-import '../../../../domain/enums/firebase_results.dart';
+import '../../../../domain/firebase_response/firebase_response.dart';
 import '../../../../domain/models/user_model.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/register_state.dart';
@@ -66,7 +66,7 @@ class RegisterController extends StateNotifier<RegisterState> {
     state = state.copyWith(acceptsPolicy: value);
   }
 
-  Future<Either<FirebaseResult, UserModel>> register(bool isCompany) async {
+  Future<Either<FirebaseResponse, UserModel>> register(bool isCompany) async {
     updateFetching(true);
 
     final result = await authenticationRepository.register(

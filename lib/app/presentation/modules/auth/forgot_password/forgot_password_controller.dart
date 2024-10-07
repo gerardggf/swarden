@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:swarden/app/domain/firebase_response/firebase_response.dart';
 
-import '../../../../domain/enums/firebase_results.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/forgot_password_state.dart';
 
@@ -28,7 +28,7 @@ class ForgotPasswordController extends StateNotifier<ForgotPasswordState> {
     state = state.copyWith(fetching: value);
   }
 
-  Future<FirebaseResult> forgotPassword() async {
+  Future<FirebaseResponse> forgotPassword() async {
     updateFetching(true);
     final result =
         await authenticationRepository.sendPasswordResetEmail(state.email);

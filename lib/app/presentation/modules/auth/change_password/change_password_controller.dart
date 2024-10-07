@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../domain/enums/firebase_results.dart';
+import 'package:swarden/app/domain/firebase_response/firebase_response.dart';
 import '../../../../domain/repositories/authentication_repository.dart';
 import 'state/change_password_state.dart';
 
@@ -27,7 +27,7 @@ class ChangePasswordController extends StateNotifier<ChangePasswordState> {
     state = state.copyWith(fetching: value);
   }
 
-  Future<FirebaseResult> changePassword() async {
+  Future<FirebaseResponse> changePassword() async {
     updateFetching(true);
     final result =
         await authenticationRepository.sendPasswordResetEmail(state.email);
