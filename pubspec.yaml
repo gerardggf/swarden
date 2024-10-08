@@ -36,6 +36,25 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.9
   freezed: ^2.5.2
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  rmove_alpha_ios: true
+  image_path: "assets/img/icon.png"
+  web:
+    generate: true
+    image_path: "assets/img/icon.png"
+    background_color: "#FFFFFF"
+    theme_color: "#FFFFFF"
+  windows:
+    generate: true
+    image_path: "assets/img/icon.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/img/icon.png"
 
 flutter:
   uses-material-design: true

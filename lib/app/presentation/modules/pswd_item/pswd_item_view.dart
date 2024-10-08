@@ -131,6 +131,15 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                   ],
                 ),
                 20.h,
+                if (widget.pswdItem.url != null) Text(texts.auth.password),
+                if (widget.pswdItem.url != null)
+                  Row(
+                    children: [
+                      const Icon(Icons.public),
+                      Text(widget.pswdItem.url ?? ''),
+                    ],
+                  ),
+                20.h,
                 Text(texts.auth.password),
                 Row(
                   children: [
