@@ -6,8 +6,14 @@ final cryptoServiceProvider = Provider<CryptoService>(
 );
 
 class CryptoService {
-  String encryptPassword(String plainTextPassword, String masterKey) {
-    final key = Key.fromUtf8(masterKey);
+  String encryptPassword(
+    String plainTextPassword,
+    String masterKey,
+    String keyword,
+  ) {
+    //combina masterKey y keyword y ajusta la longitud a 32 caracteres
+    final combinedKey = (masterKey + keyword).padRight(32).substring(0, 32);
+    final key = Key.fromUtf8(combinedKey);
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
 
@@ -15,8 +21,14 @@ class CryptoService {
     return encrypted.base64;
   }
 
-  String decryptPassword(String encryptedPassword, String masterKey) {
-    final key = Key.fromUtf8(masterKey);
+  String decryptPassword(
+    String encryptedPassword,
+    String masterKey,
+    String keyword,
+  ) {
+    //combina masterKey y keyword y ajusta la longitud a 32 caracteres
+    final combinedKey = (masterKey + keyword).padRight(32).substring(0, 32);
+    final key = Key.fromUtf8(combinedKey);
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../domain/repositories/authentication_repository.dart';
+import '../global/controllers/session_controller.dart';
 import 'auth/auth_view.dart';
 
 class SplashView extends ConsumerStatefulWidget {
@@ -26,14 +28,13 @@ class _SplashViewState extends ConsumerState<SplashView> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final currentUserId = FirebaseAuth.instance.currentUser?.uid;
       if (currentUserId != null) {
-        // final user = await ref
-        //     .read(authenticationRepositoryProvider)
-        //     .getUser(currentUserId);
-        // if (user != null) {
-        //   ref.read(sessionControllerProvider.notifier).setUser(user);
-        // }
+        final user = await ref
+            .read(authenticationRepositoryProvider)
+            .getUser(currentUserId);
+        if (user != null) {
+          ref.read(sessionControllerProvider.notifier).setUser(user);
+        }
       }
-      if (!mounted) return;
       if (!mounted) return;
       context.pushReplacementNamed(AuthView.routeName);
     });

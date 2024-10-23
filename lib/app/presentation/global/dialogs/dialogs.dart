@@ -197,6 +197,9 @@ class _EnterTextDialogState extends State<EnterTextDialog> {
         style: const TextStyle(color: AppColors.light),
       ),
       content: TextField(
+        onTapOutside: (_) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         controller: textController,
         decoration: InputDecoration(
           hintText: widget.hintText,

@@ -9,6 +9,7 @@ class SwardenTextField extends StatelessWidget {
     this.labelText,
     this.validator,
     this.icon,
+    this.onChanged,
     this.obscureText = false,
   });
 
@@ -17,18 +18,24 @@ class SwardenTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final IconData? icon;
   final bool obscureText;
+  final void Function(String value)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         if (icon != null) Icon(icon),
-        10.w,
+        if (icon != null) 15.w,
         Expanded(
           child: TextFormField(
+            onTapOutside: (_) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
             obscureText: obscureText,
             controller: controller,
+            onChanged: onChanged,
             cursorColor: AppColors.light,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
               focusColor: AppColors.light,
               label: labelText == null ? null : Text(labelText!),
@@ -42,6 +49,7 @@ class SwardenTextField extends StatelessWidget {
                 borderSide: BorderSide(color: AppColors.light),
               ),
             ),
+            validator: validator,
           ),
         ),
       ],

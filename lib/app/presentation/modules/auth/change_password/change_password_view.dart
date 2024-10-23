@@ -78,6 +78,9 @@ class _ChangePasswordViewState extends ConsumerState<ChangePasswordView> {
                         ),
                         20.h,
                         TextField(
+                          onTapOutside: (_) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          },
                           controller: _emailController,
                           cursorColor: AppColors.light,
                           decoration:

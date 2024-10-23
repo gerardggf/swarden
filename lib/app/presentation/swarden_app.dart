@@ -16,17 +16,14 @@ class SWardenApp extends StatefulWidget {
 class _SWardenAppState extends State<SWardenApp> with RoutesMixin {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: MaterialApp.router(
-        locale: TranslationProvider.of(context).flutterLocale,
-        supportedLocales: AppLocaleUtils.supportedLocales,
-        localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        debugShowCheckedModeBanner: false,
-        title: Global.appName,
-        theme: SWardenTheme.lightTeme,
-        routerConfig: router,
-      ),
+    return MaterialApp.router(
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      debugShowCheckedModeBanner: false,
+      title: Global.appName,
+      theme: SWardenTheme.lightTeme,
+      routerConfig: router,
     );
   }
 }

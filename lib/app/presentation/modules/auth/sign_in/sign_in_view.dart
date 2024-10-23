@@ -85,6 +85,9 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                 child: Column(
                   children: [
                     TextField(
+                      onTapOutside: (_) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
                       controller: _emailController,
                       cursorColor: AppColors.light,
                       decoration: InputDecoration(
@@ -96,6 +99,9 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                     ),
                     30.h,
                     TextField(
+                      onTapOutside: (_) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
                       controller: _passwordController,
                       cursorColor: AppColors.light,
                       decoration: InputDecoration(

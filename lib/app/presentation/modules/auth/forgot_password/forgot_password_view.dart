@@ -67,6 +67,9 @@ class _ForgotPasswordViewState extends ConsumerState<ForgotPasswordView> {
                   child: Column(
                     children: [
                       TextField(
+                        onTapOutside: (_) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
                         controller: _emailController,
                         cursorColor: AppColors.light,
                         decoration:

@@ -33,7 +33,7 @@ class SignInController extends StateNotifier<SignInState> {
 
   Future<Either<FirebaseResponse, UserModel>> signIn() async {
     updateFetching(true);
-    final result = authenticationRepository.signIn(
+    final result = await authenticationRepository.signIn(
       state.email,
       state.password,
     );

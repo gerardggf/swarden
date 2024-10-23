@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/presentation/global/widgets/swarden_text_field.dart';
 
 import '../../../../core/const/colors.dart';
 import '../../../../core/generated/translations.g.dart';
@@ -53,6 +54,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
         title: Text(texts.auth.register),
       ),
       body: Form(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         key: _particularFormKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -60,8 +62,9 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
             physics: const BouncingScrollPhysics(),
             children: [
               10.h,
-              _buildFormWidget(
-                title: '${texts.auth.name}*',
+              SwardenTextField(
+                icon: Icons.person,
+                labelText: '${texts.auth.name}*',
                 onChanged: (value) {
                   notifier.updateName(value);
                 },
@@ -69,8 +72,9 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 validator: (text) => Validators.validateIsNotEmpty(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.lastName}*',
+              SwardenTextField(
+                icon: Icons.people,
+                labelText: '${texts.auth.lastName}*',
                 onChanged: (value) {
                   notifier.updateLastName(value);
                 },
@@ -78,26 +82,27 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 validator: (text) => Validators.validateIsNotEmpty(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.address}*',
+              SwardenTextField(
+                icon: Icons.location_on,
+                labelText: texts.auth.address,
                 onChanged: (value) {
                   notifier.updateAddress(value);
                 },
                 controller: _addressController,
-                validator: (text) => Validators.validateIsNotEmpty(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.city}*',
+              SwardenTextField(
+                icon: Icons.location_city,
+                labelText: texts.auth.city,
                 onChanged: (value) {
                   notifier.updateCity(value);
                 },
                 controller: _cityController,
-                validator: (text) => Validators.validateIsNotEmpty(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.email}*',
+              SwardenTextField(
+                icon: Icons.email_outlined,
+                labelText: '${texts.auth.email}*',
                 onChanged: (value) {
                   notifier.updateEmail(value);
                 },
@@ -105,8 +110,9 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 validator: (text) => Validators.validateEmail(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.password}*',
+              SwardenTextField(
+                icon: Icons.password,
+                labelText: '${texts.auth.password}*',
                 onChanged: (value) {
                   notifier.updatePassword(value);
                 },
@@ -115,9 +121,9 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 validator: (text) => Validators.validatePassword(text),
               ),
               15.h,
-              _buildFormWidget(
-                title: '${texts.auth.repeatPassword}*',
-                onChanged: (value) {},
+              SwardenTextField(
+                icon: Icons.password,
+                labelText: '${texts.auth.repeatPassword}*',
                 obscureText: true,
                 controller: _repeatPasswordController,
                 validator: (text) => Validators.validateRepeatPassword(
@@ -126,59 +132,6 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 ),
               ),
               30.h,
-              // Row(
-              //   children: [
-              //     Checkbox(
-              //       activeColor: AppColors.light,
-              //       value: state.acceptsPolicy,
-              //       onChanged: (value) {
-              //         notifier.updateAcceptsPolicy(value ?? false);
-              //       },
-              //     ),
-              //     5.w,
-              //     Expanded(
-              //       child: RichText(
-              //         text: TextSpan(
-              //           style: const TextStyle(
-              //             color: Colors.black,
-              //             fontSize: 18,
-              //           ),
-              //           children: [
-              //             TextSpan(
-              //               text: texts.auth.iHaveReadAndAgreeThe,
-              //             ),
-              //             TextSpan(
-              //               text: '${texts.auth.legalConditions}*',
-              //               recognizer: TapGestureRecognizer()
-              //                 ..onTap = () {
-              //                   launchCustomUrl(Urls.privacyPolicy);
-              //                 },
-              //               style: const TextStyle(
-              //                 decoration: TextDecoration.underline,
-              //                 color: AppColors.light,
-              //               ),
-              //             ),
-              //             TextSpan(
-              //               text: texts.auth.andThe,
-              //             ),
-              //             TextSpan(
-              //               text: '${texts.auth.privacyPolicy}*',
-              //               recognizer: TapGestureRecognizer()
-              //                 ..onTap = () {
-              //                   launchCustomUrl(Urls.privacyPolicy);
-              //                 },
-              //               style: const TextStyle(
-              //                 decoration: TextDecoration.underline,
-              //                 color: AppColors.light,
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              //20.h,
               if (state.fetching)
                 const Center(
                   child: CircularProgressIndicator(
@@ -226,39 +179,18 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
     );
   }
 
-  Widget _buildFormWidget({
-    required String title,
-    required void Function(String value) onChanged,
-    required TextEditingController controller,
-    String? Function(String?)? validator,
-    bool obscureText = false,
-  }) {
-    return TextFormField(
-      controller: controller,
-      textCapitalization: TextCapitalization.sentences,
-      cursorColor: AppColors.light,
-      decoration: InputDecoration(
-        labelText: title,
-      ),
-      obscureText: obscureText,
-      onChanged: onChanged,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: validator,
-    );
-  }
-
   Future<void> _submit() async {
     if (!_particularFormKey.currentState!.validate()) {
       return;
     }
-    if (!ref.read(registerControllerProvider).acceptsPolicy) {
-      SWardenDialogs.snackBar(
-        context: context,
-        text: texts.auth.youMustAcceptThePrivacyPolicy,
-        color: Colors.orange,
-      );
-      return;
-    }
+    // if (!ref.read(registerControllerProvider).acceptsPolicy) {
+    //   SWardenDialogs.snackBar(
+    //     context: context,
+    //     text: texts.auth.youMustAcceptThePrivacyPolicy,
+    //     color: Colors.orange,
+    //   );
+    //   return;
+    // }
 
     final notifier = ref.read(registerControllerProvider.notifier);
     notifier.updateFetching(true);

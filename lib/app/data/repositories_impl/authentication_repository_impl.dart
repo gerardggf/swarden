@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/data/services/local/biometrics_service.dart';
-import 'package:swarden/app/domain/enums/roles.dart';
+import 'package:swarden/app/core/enums/roles.dart';
 
 import '../../core/const/collections.dart';
 import '../../domain/either/either.dart';

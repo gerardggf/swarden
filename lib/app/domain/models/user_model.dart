@@ -1,4 +1,4 @@
-import 'package:swarden/app/domain/enums/roles.dart';
+import 'package:swarden/app/core/enums/roles.dart';
 
 class UserModel {
   final String id;

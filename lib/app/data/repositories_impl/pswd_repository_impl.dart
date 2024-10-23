@@ -1,5 +1,7 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:swarden/app/core/const/global.dart';
+import 'package:swarden/app/core/enums/storage_keys.dart';
 import 'package:swarden/app/data/services/local/crypto_service.dart';
 
 import '../../domain/repositories/pswd_repository.dart';
@@ -14,27 +16,70 @@ class PswdRepositoryImpl implements PswdRepository {
   });
 
   @override
-  Future<String?> decryptPswd() {
-    // TODO: implement decryptPswd
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> encryptPswd(String password) {
-    // TODO: implement encryptPswd
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> saveMasterKey(String masterKey) async {
+  Future<bool> saveMasterKey(String? masterKey) async {
     try {
-      await secureStorage.write(key: 'masterKey', value: masterKey);
+      if (masterKey == null) {
+        await secureStorage.delete(key: StorageKeysEnum.masterKey.name);
+        return true;
+      }
+      await secureStorage.write(
+        key: StorageKeysEnum.masterKey.name,
+        value: masterKey,
+      );
       return true;
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
       return false;
+    }
+  }
+
+  @override
+  Future<String?> encryptMessage(String message) async {
+    try {
+      final masterKey =
+          await secureStorage.read(key: StorageKeysEnum.masterKey.name);
+      if (masterKey == null) {
+        if (kDebugMode) {
+          print("Missing masterKey");
+        }
+        return null;
+      }
+      return cryptoService.encryptPassword(
+        message,
+        masterKey,
+        Global.messagesKeyword,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
+    }
+  }
+
+  @override
+  Future<String?> decryptMessage(String encryptedMessage) async {
+    try {
+      final masterKey =
+          await secureStorage.read(key: StorageKeysEnum.masterKey.name);
+      if (masterKey == null) {
+        if (kDebugMode) {
+          print("Missing masterKey");
+        }
+        return null;
+      }
+      return cryptoService.decryptPassword(
+        encryptedMessage,
+        masterKey,
+        Global.messagesKeyword,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+      return null;
     }
   }
 }

@@ -13,6 +13,8 @@ import '../../../core/const/assets.dart';
 import '../../../domain/models/pswd_item_model.dart';
 import '../../global/functions/urls_functions.dart';
 
+//TODO: traducir pag
+
 class PswdItemView extends ConsumerStatefulWidget {
   const PswdItemView(this.pswdItem, {super.key});
 
@@ -58,13 +60,16 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
               },
               child: Row(
                 children: [
-                  widget.pswdItem.url == null
-                      ? Image.asset(Assets.icon)
-                      : Image.network(
-                          getFaviconUrl(
-                            widget.pswdItem.url!,
+                  SizedBox(
+                    width: 50,
+                    child: widget.pswdItem.url == null
+                        ? Image.asset(Assets.icon)
+                        : Image.network(
+                            getFaviconUrl(
+                              widget.pswdItem.url!,
+                            ),
                           ),
-                        ),
+                  ),
                   10.w,
                   FittedBox(
                     child: Text(
@@ -130,16 +135,7 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                     ),
                   ],
                 ),
-                20.h,
-                if (widget.pswdItem.url != null) Text(texts.auth.password),
-                if (widget.pswdItem.url != null)
-                  Row(
-                    children: [
-                      const Icon(Icons.public),
-                      Text(widget.pswdItem.url ?? ''),
-                    ],
-                  ),
-                20.h,
+                15.h,
                 Text(texts.auth.password),
                 Row(
                   children: [

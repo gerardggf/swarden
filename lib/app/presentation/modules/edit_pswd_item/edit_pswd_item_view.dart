@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_button.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_text_field.dart';
 import 'package:swarden/app/presentation/modules/auth/auth_view.dart';
@@ -46,8 +47,9 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
     super.dispose();
   }
 
-  final _addPswdItemKey = GlobalKey<FormState>();
+  final _editPswdItemKey = GlobalKey<FormState>();
 
+//TODO:traducir pag
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +57,7 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
         title: const Text('Edit password'),
       ),
       body: Form(
-        key: _addPswdItemKey,
+        key: _editPswdItemKey,
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
@@ -85,7 +87,7 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
             SwardenButton(
               child: const Text('Edit password item'),
               onPressed: () async {
-                await addPswdItem();
+                await editPswdItem();
               },
             ),
             20.h,
@@ -131,28 +133,39 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
     );
   }
 
-  Future<void> addPswdItem() async {
+  //TODO: pasar esto a contorller con estado
+
+  Future<void> editPswdItem() async {
     final result = await ref
-        .read(accountRepositoryProvider)
-        .updatePswdItem(widget.pswdItem.copyWith(
-          name: _nameController.text,
-          url: _urlController.text.isEmpty ? null : _urlController.text,
-          username: _usernameController.text,
-          pswd: _passwordController.text,
-        ));
-    if (!mounted) return;
-    if (result) {
-      SWardenDialogs.snackBar(
-        context: context,
-        text: 'Password edited',
-      );
-      context.pop();
-    } else {
-      SWardenDialogs.snackBar(
-        context: context,
-        text: 'Something went wrong',
-        color: Colors.red,
-      );
-    }
+        .read(pswdRepositoryProvider)
+        .encryptMessage(_passwordController.text);
+    print(result);
+    if (result == null) return;
+    final decrypted =
+        await ref.read(pswdRepositoryProvider).decryptMessage(result);
+    print(decrypted);
+
+    //   final result = await ref
+    //       .read(accountRepositoryProvider)
+    //       .updatePswdItem(widget.pswdItem.copyWith(
+    //         name: _nameController.text,
+    //         url: _urlController.text.isEmpty ? null : _urlController.text,
+    //         username: _usernameController.text,
+    //         pswd: _passwordController.text,
+    //       ));
+    //   if (!mounted) return;
+    //   if (result) {
+    //     SWardenDialogs.snackBar(
+    //       context: context,
+    //       text: 'Password edited',
+    //     );
+    //     context.pop();
+    //   } else {
+    //     SWardenDialogs.snackBar(
+    //       context: context,
+    //       text: 'Something went wrong',
+    //       color: Colors.red,
+    //     );
+    //   }
   }
 }
