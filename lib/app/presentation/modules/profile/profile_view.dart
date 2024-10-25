@@ -5,7 +5,10 @@ import 'package:swarden/app/core/extensions/date_extension.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 
 import '../../../core/const/assets.dart';
+import '../../../core/generated/translations.g.dart';
+import '../../../domain/repositories/authentication_repository.dart';
 import '../../global/controllers/session_controller.dart';
+import '../../global/dialogs/dialogs.dart';
 
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
@@ -61,6 +64,22 @@ class ProfileView extends ConsumerWidget {
                 ),
               ],
             ),
+          ),
+          ListTile(
+            title: Text(texts.auth.logout),
+            leading: const Icon(Icons.logout),
+            onTap: () async {
+              final result = await SWardenDialogs.dialog(
+                context: context,
+                title: 'Cerrar sesión',
+                content: const Text(
+                  '¿Seguro que quieres cerrar sesión?',
+                ),
+              );
+              if (result != true) return;
+              ref.read(sessionControllerProvider.notifier).setUser(null);
+              await ref.read(authenticationRepositoryProvider).signOut();
+            },
           ),
         ],
       ),

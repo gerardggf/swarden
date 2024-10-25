@@ -11,6 +11,7 @@ class SwardenTextField extends StatelessWidget {
     this.icon,
     this.onChanged,
     this.obscureText = false,
+    this.textCapitalization,
   });
 
   final TextEditingController controller;
@@ -19,6 +20,7 @@ class SwardenTextField extends StatelessWidget {
   final IconData? icon;
   final bool obscureText;
   final void Function(String value)? onChanged;
+  final TextCapitalization? textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class SwardenTextField extends StatelessWidget {
             obscureText: obscureText,
             controller: controller,
             onChanged: onChanged,
+            textCapitalization: textCapitalization ?? TextCapitalization.none,
             cursorColor: AppColors.light,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(

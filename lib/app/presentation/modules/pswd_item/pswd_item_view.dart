@@ -5,7 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
+import 'package:swarden/app/presentation/global/widgets/error_info_widget.dart';
+import 'package:swarden/app/presentation/global/widgets/loading_widget.dart';
 import 'package:swarden/app/presentation/modules/edit_pswd_item/edit_pswd_item_view.dart';
 import 'package:swarden/app/presentation/modules/pswd_item/pswd_item_controller.dart';
 
@@ -14,6 +17,11 @@ import '../../../domain/models/pswd_item_model.dart';
 import '../../global/functions/urls_functions.dart';
 
 //TODO: traducir pag
+
+final decryptFutureProvider =
+    FutureProvider.autoDispose.family<String?, String>(
+  (ref, message) => ref.watch(pswdRepositoryProvider).decryptMessage(message),
+);
 
 class PswdItemView extends ConsumerStatefulWidget {
   const PswdItemView(this.pswdItem, {super.key});
@@ -31,6 +39,9 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
   Widget build(BuildContext context) {
     final state = ref.watch(pswdItemControllerProvider);
     final notifier = ref.read(pswdItemControllerProvider.notifier);
+    final decryptFuture = ref.watch(
+      decryptFutureProvider(widget.pswdItem.pswd),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.pswdItem.name),
@@ -109,14 +120,18 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                       size: 30,
                     ),
                     10.w,
-                    Text(
-                      widget.pswdItem.username,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          widget.pswdItem.username,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
-                    const Spacer(),
                     IconButton(
                       onPressed: () {
                         Clipboard.setData(
@@ -137,52 +152,65 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                 ),
                 15.h,
                 Text(texts.auth.password),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.password,
-                      size: 30,
-                    ),
-                    10.w,
-                    Text(
-                      state.showPassword
-                          ? widget.pswdItem.pswd
-                          : List.generate(
-                                  widget.pswdItem.pswd.length, (index) => '*')
-                              .join(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        notifier.updateShowPassword(!state.showPassword);
-                      },
-                      icon: Icon(
-                        state.showPassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Clipboard.setData(
-                          ClipboardData(
-                            text: widget.pswdItem.pswd,
+                decryptFuture.when(
+                  data: (password) {
+                    if (password == null) return const SizedBox();
+                    return Row(
+                      children: [
+                        const Icon(
+                          Icons.password,
+                          size: 30,
+                        ),
+                        10.w,
+                        Expanded(
+                          child: Text(
+                            state.showPassword
+                                ? password
+                                : List.generate(
+                                    password.length,
+                                    (index) => '*',
+                                  ).join(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
-                        );
-                        SWardenDialogs.snackBar(
-                          context: context,
-                          text: 'Contraseña copiada al portapapeles',
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.copy_outlined,
-                      ),
-                    ),
-                  ],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            notifier.updateShowPassword(!state.showPassword);
+                          },
+                          icon: Icon(
+                            state.showPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: !state.showPassword
+                              ? null
+                              : () {
+                                  Clipboard.setData(
+                                    ClipboardData(
+                                      text: password,
+                                    ),
+                                  );
+                                  SWardenDialogs.snackBar(
+                                    context: context,
+                                    text: 'Contraseña copiada al portapapeles',
+                                  );
+                                },
+                          icon: const Icon(
+                            Icons.copy_outlined,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  error: (e, _) => ErrorInfoWidget(
+                    text: e.toString(),
+                  ),
+                  loading: () => const LoadingWidget(),
                 ),
               ],
             ),

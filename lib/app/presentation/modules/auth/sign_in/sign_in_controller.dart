@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 
 import '../../../../domain/either/either.dart';
 import '../../../../domain/firebase_response/firebase_response.dart';
@@ -11,13 +13,19 @@ final signInControllerProvider =
   (ref) => SignInController(
     SignInState(),
     ref.watch(authenticationRepositoryProvider),
+    ref.watch(pswdRepositoryProvider),
   ),
 );
 
 class SignInController extends StateNotifier<SignInState> {
-  SignInController(super.state, this.authenticationRepository);
+  SignInController(
+    super.state,
+    this.authenticationRepository,
+    this.pswdRepository,
+  );
 
   final AuthenticationRepository authenticationRepository;
+  final PswdRepository pswdRepository;
 
   void updateEmail(String email) {
     state = state.copyWith(email: email);
@@ -37,6 +45,12 @@ class SignInController extends StateNotifier<SignInState> {
       state.email,
       state.password,
     );
+    final keySaved = await pswdRepository.saveMasterKey(state.password);
+    if (!keySaved) {
+      if (kDebugMode) {
+        print(keySaved);
+      }
+    }
     updateFetching(false);
     return result;
   }

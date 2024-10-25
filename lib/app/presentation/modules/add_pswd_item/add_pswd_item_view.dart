@@ -51,6 +51,7 @@ class _AddPswdItemViewState extends ConsumerState<AddPswdItemView> {
             20.h,
             SwardenTextField(
               controller: _nameController,
+              textCapitalization: TextCapitalization.sentences,
               icon: Icons.web,
               labelText: texts.auth.name,
             ),

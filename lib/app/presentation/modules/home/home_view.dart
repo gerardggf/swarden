@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +33,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     final pswdItemsStream = ref.watch(pswdItemsStreamProvider);
-    print(FirebaseAuth.instance.currentUser);
     return Scaffold(
       drawer: const SWardenDrawer(),
       appBar: AppBar(

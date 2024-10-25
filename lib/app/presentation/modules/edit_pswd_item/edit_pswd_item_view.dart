@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
-import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_button.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_text_field.dart';
 import 'package:swarden/app/presentation/modules/auth/auth_view.dart';
+import 'package:swarden/app/presentation/modules/edit_pswd_item/edit_pswd_item_controller.dart';
+import 'package:swarden/app/presentation/modules/pswd_item/pswd_item_view.dart';
 
 import '../../../domain/repositories/account_repository.dart';
 import '../../global/dialogs/dialogs.dart';
@@ -32,10 +33,25 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
   @override
   void initState() {
     super.initState();
-    _nameController.text = widget.pswdItem.name;
-    _urlController.text = widget.pswdItem.url ?? '';
-    _usernameController.text = widget.pswdItem.username;
-    _passwordController.text = widget.pswdItem.pswd;
+    _init();
+  }
+
+  void _init() async {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final notifier = ref.read(editPswdItemControllerProvider.notifier);
+        _nameController.text = widget.pswdItem.name;
+        notifier.updateName(_nameController.text);
+        _urlController.text = widget.pswdItem.url ?? '';
+        notifier.updateUrl(_urlController.text);
+        _usernameController.text = widget.pswdItem.username;
+        notifier.updateUsername(_usernameController.text);
+        _passwordController.text = (await ref
+                .read(decryptFutureProvider(widget.pswdItem.pswd).future)) ??
+            '';
+        notifier.updatePassword(_passwordController.text);
+      },
+    );
   }
 
   @override
@@ -52,6 +68,7 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
 //TODO:traducir pag
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.read(editPswdItemControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit password'),
@@ -66,22 +83,34 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
               controller: _nameController,
               icon: Icons.web,
               labelText: texts.auth.name,
+              onChanged: (value) {
+                notifier.updateName(value);
+              },
             ),
             SwardenTextField(
               controller: _urlController,
               icon: Icons.public_outlined,
               labelText: 'URL',
+              onChanged: (value) {
+                notifier.updateUrl(value);
+              },
             ),
             SwardenTextField(
               controller: _usernameController,
               icon: Icons.person_outline,
               labelText: '${texts.auth.email} / Username',
+              onChanged: (value) {
+                notifier.updateUsername(value);
+              },
             ),
             SwardenTextField(
               controller: _passwordController,
               icon: Icons.password_outlined,
               labelText: texts.auth.password,
               obscureText: true,
+              onChanged: (value) {
+                notifier.updatePassword(value);
+              },
             ),
             20.h,
             SwardenButton(
@@ -137,35 +166,21 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
 
   Future<void> editPswdItem() async {
     final result = await ref
-        .read(pswdRepositoryProvider)
-        .encryptMessage(_passwordController.text);
-    print(result);
-    if (result == null) return;
-    final decrypted =
-        await ref.read(pswdRepositoryProvider).decryptMessage(result);
-    print(decrypted);
-
-    //   final result = await ref
-    //       .read(accountRepositoryProvider)
-    //       .updatePswdItem(widget.pswdItem.copyWith(
-    //         name: _nameController.text,
-    //         url: _urlController.text.isEmpty ? null : _urlController.text,
-    //         username: _usernameController.text,
-    //         pswd: _passwordController.text,
-    //       ));
-    //   if (!mounted) return;
-    //   if (result) {
-    //     SWardenDialogs.snackBar(
-    //       context: context,
-    //       text: 'Password edited',
-    //     );
-    //     context.pop();
-    //   } else {
-    //     SWardenDialogs.snackBar(
-    //       context: context,
-    //       text: 'Something went wrong',
-    //       color: Colors.red,
-    //     );
-    //   }
+        .read(editPswdItemControllerProvider.notifier)
+        .submit(widget.pswdItem);
+    if (!mounted) return;
+    if (result) {
+      SWardenDialogs.snackBar(
+        context: context,
+        text: 'Password edited',
+      );
+      context.pop();
+    } else {
+      SWardenDialogs.snackBar(
+        context: context,
+        text: 'Something went wrong',
+        color: Colors.red,
+      );
+    }
   }
 }

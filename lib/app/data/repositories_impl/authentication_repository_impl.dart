@@ -5,6 +5,7 @@ import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/data/services/local/biometrics_service.dart';
 import 'package:swarden/app/core/enums/roles.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 
 import '../../core/const/collections.dart';
 import '../../domain/either/either.dart';
@@ -17,10 +18,12 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   AuthenticationRepositoryImpl(
     this.sessionController,
     this.biometricsService,
+    this.pswdRepository,
   );
 
   final SessionController sessionController;
   final BiometricsService biometricsService;
+  final PswdRepository pswdRepository;
 
   @override
   User? get currentUser => FirebaseAuth.instance.currentUser;
@@ -112,8 +115,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<bool> signOut() async {
     try {
-      await FirebaseAuth.instance.signOut();
-      sessionController.setUser(null);
+      final result = await pswdRepository.saveMasterKey(null);
+      if (result) {
+        await FirebaseAuth.instance.signOut();
+        sessionController.setUser(null);
+      }
       return true;
     } catch (e) {
       return false;

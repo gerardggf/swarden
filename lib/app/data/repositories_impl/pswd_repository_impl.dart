@@ -64,6 +64,7 @@ class PswdRepositoryImpl implements PswdRepository {
     try {
       final masterKey =
           await secureStorage.read(key: StorageKeysEnum.masterKey.name);
+
       if (masterKey == null) {
         if (kDebugMode) {
           print("Missing masterKey");

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swarden/app/data/services/local/biometrics_service.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 
 import '../../data/repositories_impl/authentication_repository_impl.dart';
 import '../../presentation/global/controllers/session_controller.dart';
@@ -12,6 +13,7 @@ final authenticationRepositoryProvider = Provider<AuthenticationRepository>(
   (ref) => AuthenticationRepositoryImpl(
     ref.watch(sessionControllerProvider.notifier),
     ref.watch(biometricsServiceProvider),
+    ref.watch(pswdRepositoryProvider),
   ),
 );
 

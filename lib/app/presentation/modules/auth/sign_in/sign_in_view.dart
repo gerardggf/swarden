@@ -115,13 +115,9 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                     40.h,
                     SwardenButton(
                       onPressed: _submit,
-                      child: state.fetching
-                          ? const CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text(
-                              texts.auth.signIn,
-                            ),
+                      child: Text(
+                        texts.auth.signIn,
+                      ),
                     ),
                     15.h,
                     TextButton(

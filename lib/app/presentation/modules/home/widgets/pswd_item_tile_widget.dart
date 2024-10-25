@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/const/assets.dart';
+import 'package:swarden/app/core/const/colors.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
@@ -24,30 +25,7 @@ class PswdItemTileWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onLongPress: () async {
-        //TODO:traducir
-        final result = await SWardenDialogs.dialog(
-          context: context,
-          title: 'Eliminar registro',
-          content: const Text('¿Quieres eliminar este registro?'),
-        );
-        if (result != true || !context.mounted) return;
-        final result2 = await SWardenDialogs.dialog(
-          context: context,
-          title: 'Eliminar registro',
-          content: const Text('¿Estás seguro/a?'),
-        );
-        if (result2 == true) {
-          ref.read(accountRepositoryProvider).deletePswdItem(
-                pswdItem.id,
-              );
-          if (!context.mounted) return;
-          SWardenDialogs.snackBar(
-            context: context,
-            text: 'Contraseña eliminada',
-          );
-        }
-      },
+      onLongPress: () => _deletePswdItem(context, ref),
       onTap: () async {
         final authenticate = await ref
             .read(authenticationRepositoryProvider)
@@ -63,7 +41,7 @@ class PswdItemTileWidget extends ConsumerWidget {
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: AppColors.light,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -95,12 +73,17 @@ class PswdItemTileWidget extends ConsumerWidget {
               children: [
                 Text(
                   pswdItem.name,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                  ),
                 ),
+                2.h,
                 Text(
                   '${texts.global.createdOn} ${pswdItem.creationDate.toDate().toDDMMYYYY()}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Colors.grey,
+                        color: Colors.white70,
                         fontStyle: FontStyle.italic,
                         fontSize: 10,
                       ),
@@ -111,5 +94,30 @@ class PswdItemTileWidget extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _deletePswdItem(BuildContext context, WidgetRef ref) async {
+    //TODO:traducir
+    final result = await SWardenDialogs.dialog(
+      context: context,
+      title: 'Eliminar registro',
+      content: const Text('¿Quieres eliminar este registro?'),
+    );
+    if (result != true || !context.mounted) return;
+    final result2 = await SWardenDialogs.dialog(
+      context: context,
+      title: 'Eliminar registro',
+      content: const Text('¿Estás seguro/a?'),
+    );
+    if (result2 == true) {
+      ref.read(accountRepositoryProvider).deletePswdItem(
+            pswdItem.id,
+          );
+      if (!context.mounted) return;
+      SWardenDialogs.snackBar(
+        context: context,
+        text: 'Contraseña eliminada',
+      );
+    }
   }
 }

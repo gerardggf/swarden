@@ -5,12 +5,15 @@ import 'package:swarden/app/domain/either/either.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
 import 'package:swarden/app/domain/repositories/account_repository.dart';
 import 'package:swarden/app/domain/repositories/authentication_repository.dart';
+import 'package:swarden/app/domain/repositories/pswd_repository.dart';
 
 class AccountRepositoryImpl implements AccountRepository {
   final AuthenticationRepository authRepository;
+  final PswdRepository pswdRepository;
 
   AccountRepositoryImpl({
     required this.authRepository,
+    required this.pswdRepository,
   });
 
   @override
@@ -88,8 +91,14 @@ class AccountRepositoryImpl implements AccountRepository {
           .doc(userId)
           .collection(Collections.passwords);
       final docId = ref.doc().id;
+      final encryptedPswd = await pswdRepository.encryptMessage(pswdItem.pswd);
       await ref.doc(docId).set(
-            pswdItem.copyWith(id: docId).toJson(),
+            pswdItem
+                .copyWith(
+                  id: docId,
+                  pswd: encryptedPswd,
+                )
+                .toJson(),
           );
       return true;
     } catch (e) {
@@ -119,7 +128,7 @@ class AccountRepositoryImpl implements AccountRepository {
   }
 
   @override
-  Future<bool> updatePswdItem(PswdItemModel item) async {
+  Future<bool> updatePswdItem(PswdItemModel pswdItem) async {
     try {
       final userId = authRepository.currentUser?.uid;
       if (userId == null) {
@@ -129,9 +138,10 @@ class AccountRepositoryImpl implements AccountRepository {
           .collection(Collections.users)
           .doc(userId)
           .collection(Collections.passwords)
-          .doc(item.id);
+          .doc(pswdItem.id);
+      final encryptedPswd = await pswdRepository.encryptMessage(pswdItem.pswd);
       await ref.update(
-        item.toJson(),
+        pswdItem.copyWith(pswd: encryptedPswd).toJson(),
       );
       return true;
     } catch (e) {
