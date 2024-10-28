@@ -8,13 +8,13 @@ import 'package:swarden/app/presentation/global/widgets/loading_widget.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_drawer.dart';
 import 'package:swarden/app/presentation/modules/add_pswd_item/add_pswd_item_view.dart';
 
-import '../../../domain/either/either.dart';
 import '../../../domain/models/pswd_item_model.dart';
+import '../../../domain/swarden_exception/swarden_exception.dart';
 import '../../global/widgets/error_info_widget.dart';
 import 'widgets/pswd_item_tile_widget.dart';
 
 final pswdItemsStreamProvider =
-    StreamProvider<Either<Exception, List<PswdItemModel>>>(
+    StreamProvider<SwardenEither<List<PswdItemModel>>>(
   (ref) {
     return ref.read(accountRepositoryProvider).subscribeToPswdItems();
   },

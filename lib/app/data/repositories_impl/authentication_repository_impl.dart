@@ -53,7 +53,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       debugPrint(e.code);
       return Either.left(e.code.toFirebaseResponse());
     } catch (e) {
-      return Either.left(FirebaseResponse.undefined(message: e.toString()));
+      return Either.left(
+        FirebaseResponse.undefined(
+          message: e.toString(),
+        ),
+      );
     }
   }
 
@@ -105,10 +109,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return Either.left(e.code.toFirebaseResponse());
+      return Either.left(
+        e.code.toFirebaseResponse(),
+      );
     } catch (e) {
       debugPrint(e.toString());
-      return Either.left(FirebaseResponse.undefined(message: e.toString()));
+      return Either.left(
+        FirebaseResponse.undefined(
+          message: e.toString(),
+        ),
+      );
     }
   }
 
