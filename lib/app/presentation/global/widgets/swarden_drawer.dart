@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/const/assets.dart';
+import 'package:swarden/app/core/const/colors.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 import 'package:swarden/app/domain/repositories/authentication_repository.dart';
 import 'package:swarden/app/presentation/global/controllers/session_controller.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
@@ -20,6 +21,7 @@ class SWardenDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
+      backgroundColor: AppColors.bg,
       child: SafeArea(
         child: Column(
           children: [
@@ -74,7 +76,7 @@ class SWardenDrawer extends ConsumerWidget {
             ),
             ListTile(
               leading: const Icon(Icons.settings),
-              title: const Text('Profile'),
+              title: Text(texts.profile.profile),
               onTap: () {
                 context.pop();
                 context.pushNamed(ProfileView.routeName);
@@ -86,8 +88,8 @@ class SWardenDrawer extends ConsumerWidget {
               onTap: () async {
                 final result = await SWardenDialogs.dialog(
                   context: context,
-                  title: 'Cerrar sesión',
-                  content: const Text(
+                  title: texts.auth.logout,
+                  content: Text(
                     '¿Seguro que quieres cerrar sesión?',
                   ),
                 );

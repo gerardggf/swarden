@@ -42,7 +42,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  rmove_alpha_ios: true
+  remove_alpha_ios: true
   image_path: "assets/img/icon.png"
   web:
     generate: true
@@ -62,3 +62,50 @@ flutter:
 
   assets:
     - assets/img/
+
+  fonts:
+    - family: BarlowCondensed
+      fonts:
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Regular.ttf
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Barlow_Condensed/BarlowCondensed-ThinItalic.ttf
+          weight: 100
+          style: italic

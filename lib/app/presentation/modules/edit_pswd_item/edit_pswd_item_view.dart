@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
+import 'package:swarden/app/core/extensions/text_styles_extension.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_button.dart';
@@ -68,6 +69,7 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
 //TODO:traducir pag
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(editPswdItemControllerProvider);
     final notifier = ref.read(editPswdItemControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
@@ -103,20 +105,51 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
                 notifier.updateUsername(value);
               },
             ),
-            SwardenTextField(
-              controller: _passwordController,
-              icon: Icons.password_outlined,
-              labelText: texts.auth.password,
-              obscureText: true,
-              onChanged: (value) {
-                notifier.updatePassword(value);
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: SwardenTextField(
+                    controller: _passwordController,
+                    icon: Icons.password_outlined,
+                    labelText: texts.auth.password,
+                    obscureText: !state.hidePswd,
+                    onChanged: (value) {
+                      notifier.updatePassword(value);
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    notifier.updateHidePswd(!state.hidePswd);
+                  },
+                  icon: Icon(
+                    state.hidePswd ? Icons.visibility_off : Icons.visibility,
+                  ),
+                ),
+              ],
             ),
-            20.h,
+            25.h,
+            Row(
+              children: [
+                const Icon(Icons.fingerprint),
+                15.w,
+                Expanded(
+                  child: Text(
+                    'Utilizar biometría',
+                    style: context.bodyThemeL,
+                  ),
+                ),
+                Switch(
+                  value: state.useBiometrics,
+                  onChanged: (value) => notifier.updateUseBiometrics(value),
+                ),
+              ],
+            ),
+            25.h,
             SwardenButton(
               child: const Text('Edit password item'),
               onPressed: () async {
-                await editPswdItem();
+                await _editPswdItem();
               },
             ),
             20.h,
@@ -162,9 +195,7 @@ class _EditPswdItemViewState extends ConsumerState<EditPswdItemView> {
     );
   }
 
-  //TODO: pasar esto a contorller con estado
-
-  Future<void> editPswdItem() async {
+  Future<void> _editPswdItem() async {
     final result = await ref
         .read(editPswdItemControllerProvider.notifier)
         .submit(widget.pswdItem);

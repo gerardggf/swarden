@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/const/assets.dart';
 import 'package:swarden/app/core/const/colors.dart';
-import 'package:swarden/app/core/extensions/date_extension.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
-import 'package:swarden/app/core/generated/translations.g.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 import 'package:swarden/app/domain/models/pswd_item_model.dart';
 import 'package:swarden/app/domain/repositories/authentication_repository.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
@@ -27,9 +25,11 @@ class PswdItemTileWidget extends ConsumerWidget {
     return InkWell(
       onLongPress: () => _deletePswdItem(context, ref),
       onTap: () async {
-        final authenticate = await ref
-            .read(authenticationRepositoryProvider)
-            .authenticateWithBiometrics();
+        final authenticate = pswdItem.useBiometrics
+            ? await ref
+                .read(authenticationRepositoryProvider)
+                .authenticateWithBiometrics()
+            : true;
         if (!authenticate || !context.mounted) return;
         context.pushNamed(
           PswdItemView.routeName,
@@ -37,10 +37,12 @@ class PswdItemTileWidget extends ConsumerWidget {
         );
       },
       child: Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
           color: AppColors.light,
           boxShadow: [
             BoxShadow(
@@ -81,7 +83,7 @@ class PswdItemTileWidget extends ConsumerWidget {
                 ),
                 2.h,
                 Text(
-                  '${texts.global.createdOn} ${pswdItem.creationDate.toDate().toDDMMYYYY()}',
+                  pswdItem.username,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: Colors.white70,
                         fontStyle: FontStyle.italic,

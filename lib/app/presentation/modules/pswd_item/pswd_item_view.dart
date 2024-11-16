@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 import 'package:swarden/app/core/generated/translations.g.dart';
 import 'package:swarden/app/domain/repositories/pswd_repository.dart';
+import 'package:swarden/app/presentation/global/controllers/session_controller.dart';
 import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
 import 'package:swarden/app/presentation/global/widgets/error_info_widget.dart';
 import 'package:swarden/app/presentation/global/widgets/loading_widget.dart';
@@ -20,7 +21,11 @@ import '../../global/functions/urls_functions.dart';
 
 final decryptFutureProvider =
     FutureProvider.autoDispose.family<String?, String>(
-  (ref, message) => ref.watch(pswdRepositoryProvider).decryptMessage(message),
+  (ref, message) {
+    final user = ref.watch(sessionControllerProvider);
+    if (user == null) return null;
+    return ref.watch(pswdRepositoryProvider).decryptMessage(message, user.id);
+  },
 );
 
 class PswdItemView extends ConsumerStatefulWidget {
@@ -61,7 +66,7 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         children: [
-          if (widget.pswdItem.url != null) const Text('URL'),
+          if (widget.pswdItem.url != null) const Text('URL:'),
           if (widget.pswdItem.url != null) 5.h,
           if (widget.pswdItem.url != null)
             InkWell(

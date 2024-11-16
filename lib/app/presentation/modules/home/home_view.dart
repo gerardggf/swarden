@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:swarden/app/core/const/colors.dart';
+import 'package:swarden/app/core/const/fonts.dart';
 import 'package:swarden/app/core/const/global.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
+import 'package:swarden/app/core/extensions/text_styles_extension.dart';
 import 'package:swarden/app/domain/repositories/account_repository.dart';
 import 'package:swarden/app/presentation/global/widgets/loading_widget.dart';
 import 'package:swarden/app/presentation/global/widgets/swarden_drawer.dart';
@@ -36,7 +39,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
     return Scaffold(
       drawer: const SWardenDrawer(),
       appBar: AppBar(
-        title: const Text(Global.appName),
+        title: const Text(
+          Global.appName,
+          style: TextStyle(fontFamily: Fonts.barlow),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -62,28 +68,40 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('No items in the list'),
+                      Text(
+                        'No items in the list',
+                        style: context.bodyThemeL,
+                      ),
                       20.h,
                       TextButton.icon(
-                        icon: const Icon(Icons.add),
+                        icon: const Icon(
+                          Icons.add,
+                          size: 30,
+                          color: AppColors.light,
+                        ),
                         onPressed: () {
                           context.pushNamed(AddPswdItemView.routeName);
                         },
-                        label: const Text('Add item'),
+                        label: Text(
+                          'Add item',
+                          style: context.bodyThemeL?.copyWith(
+                            color: AppColors.light,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 );
               }
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
                 itemCount: pswdItems.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final pswdItem = pswdItems[index];
                   return Padding(
                     padding: EdgeInsets.only(
-                      top: index == 0 ? 10 : 0,
+                      top: index == 0 ? 20 : 0,
                       bottom: index == pswdItems.length - 1 ? 20 : 0,
                     ),
                     child: PswdItemTileWidget(

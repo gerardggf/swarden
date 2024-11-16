@@ -21,6 +21,8 @@ mixin _$EditPswdItemState {
   String get password => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   bool get fetching => throw _privateConstructorUsedError;
+  bool get useBiometrics => throw _privateConstructorUsedError;
+  bool get hidePswd => throw _privateConstructorUsedError;
 
   /// Create a copy of EditPswdItemState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +42,9 @@ abstract class $EditPswdItemStateCopyWith<$Res> {
       String username,
       String password,
       String url,
-      bool fetching});
+      bool fetching,
+      bool useBiometrics,
+      bool hidePswd});
 }
 
 /// @nodoc
@@ -63,6 +67,8 @@ class _$EditPswdItemStateCopyWithImpl<$Res, $Val extends EditPswdItemState>
     Object? password = null,
     Object? url = null,
     Object? fetching = null,
+    Object? useBiometrics = null,
+    Object? hidePswd = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -85,6 +91,14 @@ class _$EditPswdItemStateCopyWithImpl<$Res, $Val extends EditPswdItemState>
           ? _value.fetching
           : fetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      useBiometrics: null == useBiometrics
+          ? _value.useBiometrics
+          : useBiometrics // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidePswd: null == hidePswd
+          ? _value.hidePswd
+          : hidePswd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -102,7 +116,9 @@ abstract class _$$EditPswdItemStateImplCopyWith<$Res>
       String username,
       String password,
       String url,
-      bool fetching});
+      bool fetching,
+      bool useBiometrics,
+      bool hidePswd});
 }
 
 /// @nodoc
@@ -123,6 +139,8 @@ class __$$EditPswdItemStateImplCopyWithImpl<$Res>
     Object? password = null,
     Object? url = null,
     Object? fetching = null,
+    Object? useBiometrics = null,
+    Object? hidePswd = null,
   }) {
     return _then(_$EditPswdItemStateImpl(
       name: null == name
@@ -145,6 +163,14 @@ class __$$EditPswdItemStateImplCopyWithImpl<$Res>
           ? _value.fetching
           : fetching // ignore: cast_nullable_to_non_nullable
               as bool,
+      useBiometrics: null == useBiometrics
+          ? _value.useBiometrics
+          : useBiometrics // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidePswd: null == hidePswd
+          ? _value.hidePswd
+          : hidePswd // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -157,7 +183,9 @@ class _$EditPswdItemStateImpl implements _EditPswdItemState {
       this.username = '',
       this.password = '',
       this.url = '',
-      this.fetching = false});
+      this.fetching = false,
+      this.useBiometrics = false,
+      this.hidePswd = false});
 
   @override
   @JsonKey()
@@ -174,10 +202,16 @@ class _$EditPswdItemStateImpl implements _EditPswdItemState {
   @override
   @JsonKey()
   final bool fetching;
+  @override
+  @JsonKey()
+  final bool useBiometrics;
+  @override
+  @JsonKey()
+  final bool hidePswd;
 
   @override
   String toString() {
-    return 'EditPswdItemState(name: $name, username: $username, password: $password, url: $url, fetching: $fetching)';
+    return 'EditPswdItemState(name: $name, username: $username, password: $password, url: $url, fetching: $fetching, useBiometrics: $useBiometrics, hidePswd: $hidePswd)';
   }
 
   @override
@@ -192,12 +226,16 @@ class _$EditPswdItemStateImpl implements _EditPswdItemState {
                 other.password == password) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.fetching, fetching) ||
-                other.fetching == fetching));
+                other.fetching == fetching) &&
+            (identical(other.useBiometrics, useBiometrics) ||
+                other.useBiometrics == useBiometrics) &&
+            (identical(other.hidePswd, hidePswd) ||
+                other.hidePswd == hidePswd));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, username, password, url, fetching);
+  int get hashCode => Object.hash(runtimeType, name, username, password, url,
+      fetching, useBiometrics, hidePswd);
 
   /// Create a copy of EditPswdItemState
   /// with the given fields replaced by the non-null parameter values.
@@ -215,7 +253,9 @@ abstract class _EditPswdItemState implements EditPswdItemState {
       final String username,
       final String password,
       final String url,
-      final bool fetching}) = _$EditPswdItemStateImpl;
+      final bool fetching,
+      final bool useBiometrics,
+      final bool hidePswd}) = _$EditPswdItemStateImpl;
 
   @override
   String get name;
@@ -227,6 +267,10 @@ abstract class _EditPswdItemState implements EditPswdItemState {
   String get url;
   @override
   bool get fetching;
+  @override
+  bool get useBiometrics;
+  @override
+  bool get hidePswd;
 
   /// Create a copy of EditPswdItemState
   /// with the given fields replaced by the non-null parameter values.

@@ -12,8 +12,8 @@ final pswdRepositoryProvider = Provider<PswdRepository>(
 );
 
 abstract class PswdRepository {
-  Future<String?> encryptMessage(String message);
-  Future<String?> decryptMessage(String encryptedMessage);
+  Future<String?> encryptMessage(String message, String userId);
+  Future<String?> decryptMessage(String encryptedMessage, String userId);
 
   //saves master key when user is logged in and it is deleted when the user logs out
   Future<bool> saveMasterKey(String? masterKey);

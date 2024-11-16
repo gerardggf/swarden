@@ -10,5 +10,7 @@ class EditPswdItemState with _$EditPswdItemState {
     @Default('') String password,
     @Default('') String url,
     @Default(false) bool fetching,
+    @Default(false) bool useBiometrics,
+    @Default(false) bool hidePswd,
   }) = _EditPswdItemState;
 }

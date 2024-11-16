@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 174 (58 per locale)
+/// Strings: 177 (59 per locale)
 ///
-/// Built on 2024-09-17 at 17:33 UTC
+/// Built on 2024-11-16 at 16:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -151,6 +151,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final _TranslationsAuthEn auth = _TranslationsAuthEn._(_root);
 	late final _TranslationsGlobalEn global = _TranslationsGlobalEn._(_root);
+	late final _TranslationsProfileEn profile = _TranslationsProfileEn._(_root);
 }
 
 // Path: auth
@@ -229,6 +230,16 @@ class _TranslationsGlobalEn {
 	String get lastModified => 'Last modified';
 }
 
+// Path: profile
+class _TranslationsProfileEn {
+	_TranslationsProfileEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get profile => 'Profile';
+}
+
 // Path: <root>
 class _TranslationsCa implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -255,6 +266,7 @@ class _TranslationsCa implements Translations {
 	// Translations
 	@override late final _TranslationsAuthCa auth = _TranslationsAuthCa._(_root);
 	@override late final _TranslationsGlobalCa global = _TranslationsGlobalCa._(_root);
+	@override late final _TranslationsProfileCa profile = _TranslationsProfileCa._(_root);
 }
 
 // Path: auth
@@ -333,6 +345,16 @@ class _TranslationsGlobalCa implements _TranslationsGlobalEn {
 	@override String get lastModified => 'Modificat el';
 }
 
+// Path: profile
+class _TranslationsProfileCa implements _TranslationsProfileEn {
+	_TranslationsProfileCa._(this._root);
+
+	@override final _TranslationsCa _root; // ignore: unused_field
+
+	// Translations
+	@override String get profile => 'Perfil';
+}
+
 // Path: <root>
 class _TranslationsEs implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -359,6 +381,7 @@ class _TranslationsEs implements Translations {
 	// Translations
 	@override late final _TranslationsAuthEs auth = _TranslationsAuthEs._(_root);
 	@override late final _TranslationsGlobalEs global = _TranslationsGlobalEs._(_root);
+	@override late final _TranslationsProfileEs profile = _TranslationsProfileEs._(_root);
 }
 
 // Path: auth
@@ -437,6 +460,16 @@ class _TranslationsGlobalEs implements _TranslationsGlobalEn {
 	@override String get lastModified => 'Modificado el';
 }
 
+// Path: profile
+class _TranslationsProfileEs implements _TranslationsProfileEn {
+	_TranslationsProfileEs._(this._root);
+
+	@override final _TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get profile => 'Perfil';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -501,6 +534,7 @@ extension on Translations {
 			case 'global.anErrorHasOccurred': return 'An error has occurred';
 			case 'global.createdOn': return 'Created on';
 			case 'global.lastModified': return 'Last modified';
+			case 'profile.profile': return 'Profile';
 			default: return null;
 		}
 	}
@@ -567,6 +601,7 @@ extension on _TranslationsCa {
 			case 'global.anErrorHasOccurred': return 'S\'ha produït un error';
 			case 'global.createdOn': return 'Creat el';
 			case 'global.lastModified': return 'Modificat el';
+			case 'profile.profile': return 'Perfil';
 			default: return null;
 		}
 	}
@@ -633,6 +668,7 @@ extension on _TranslationsEs {
 			case 'global.anErrorHasOccurred': return 'Se ha producido un error';
 			case 'global.createdOn': return 'Creado el';
 			case 'global.lastModified': return 'Modificado el';
+			case 'profile.profile': return 'Perfil';
 			default: return null;
 		}
 	}

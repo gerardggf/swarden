@@ -100,7 +100,8 @@ class AccountRepositoryImpl implements AccountRepository {
           .doc(userId)
           .collection(Collections.passwords);
       final docId = ref.doc().id;
-      final encryptedPswd = await pswdRepository.encryptMessage(pswdItem.pswd);
+      final encryptedPswd =
+          await pswdRepository.encryptMessage(pswdItem.pswd, userId);
       await ref.doc(docId).set(
             pswdItem
                 .copyWith(
@@ -148,7 +149,8 @@ class AccountRepositoryImpl implements AccountRepository {
           .doc(userId)
           .collection(Collections.passwords)
           .doc(pswdItem.id);
-      final encryptedPswd = await pswdRepository.encryptMessage(pswdItem.pswd);
+      final encryptedPswd =
+          await pswdRepository.encryptMessage(pswdItem.pswd, userId);
       await ref.update(
         pswdItem.copyWith(pswd: encryptedPswd).toJson(),
       );

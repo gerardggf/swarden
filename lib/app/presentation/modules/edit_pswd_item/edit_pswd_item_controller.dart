@@ -39,6 +39,14 @@ class EditPswdItemController extends StateNotifier<EditPswdItemState> {
     state = state.copyWith(fetching: value);
   }
 
+  void updateHidePswd(bool value) {
+    state = state.copyWith(hidePswd: value);
+  }
+
+  void updateUseBiometrics(bool value) {
+    state = state.copyWith(useBiometrics: value);
+  }
+
   Future<bool> submit(PswdItemModel oldPswdItem) async {
     updateFetching(true);
     final result = await accountRepository.updatePswdItem(
@@ -47,6 +55,7 @@ class EditPswdItemController extends StateNotifier<EditPswdItemState> {
         url: state.url.isEmpty ? null : state.url,
         username: state.username,
         pswd: state.password,
+        useBiometrics: state.useBiometrics,
       ),
     );
     updateFetching(false);

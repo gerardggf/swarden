@@ -8,6 +8,7 @@ class PswdItemModel {
   final String? url;
   final Timestamp creationDate;
   final Timestamp lastUpdated;
+  final bool useBiometrics;
 
   PswdItemModel({
     required this.id,
@@ -17,35 +18,37 @@ class PswdItemModel {
     required this.creationDate,
     required this.lastUpdated,
     required this.url,
+    this.useBiometrics = true,
   });
 
-  PswdItemModel copyWith({
-    String? id,
-    String? name,
-    String? username,
-    String? pswd,
-    Timestamp? creationDate,
-    Timestamp? lastUpdated,
-    String? url,
-  }) =>
+  PswdItemModel copyWith(
+          {String? id,
+          String? name,
+          String? username,
+          String? pswd,
+          Timestamp? creationDate,
+          Timestamp? lastUpdated,
+          String? url,
+          bool? useBiometrics}) =>
       PswdItemModel(
-        name: name ?? this.name,
-        id: id ?? this.id,
-        username: username ?? this.username,
-        pswd: pswd ?? this.pswd,
-        creationDate: creationDate ?? this.creationDate,
-        lastUpdated: lastUpdated ?? this.lastUpdated,
-        url: url ?? this.url,
-      );
+          name: name ?? this.name,
+          id: id ?? this.id,
+          username: username ?? this.username,
+          pswd: pswd ?? this.pswd,
+          creationDate: creationDate ?? this.creationDate,
+          lastUpdated: lastUpdated ?? this.lastUpdated,
+          url: url ?? this.url,
+          useBiometrics: useBiometrics ?? this.useBiometrics);
 
   factory PswdItemModel.fromJson(Map<String, dynamic> json) => PswdItemModel(
-        name: json["name"],
-        id: json["id"],
-        username: json["username"],
-        pswd: json["pswd"],
+        name: json["name"] ?? '',
+        id: json["id"] ?? '',
+        username: json["username"] ?? '',
+        pswd: json["pswd"] ?? '',
         creationDate: json["creationDate"],
-        lastUpdated: json["lastUpdated"],
+        lastUpdated: json["lastUpdated"] ?? json["creationDate"],
         url: json["url"],
+        useBiometrics: json["useBiometrics"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,5 +59,6 @@ class PswdItemModel {
         "creationDate": creationDate,
         "lastUpdated": lastUpdated,
         "url": url,
+        "useBiometrics": useBiometrics,
       };
 }

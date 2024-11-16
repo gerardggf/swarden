@@ -210,18 +210,18 @@ class _EnterTextDialogState extends State<EnterTextDialog> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
-            'Cancel',
-            style: TextStyle(color: AppColors.light),
+          child: Text(
+            texts.global.cancel,
+            style: const TextStyle(color: AppColors.light),
           ),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context, textController.text);
           },
-          child: const Text(
-            'Confirm',
-            style: TextStyle(color: AppColors.light),
+          child: Text(
+            texts.global.confirm,
+            style: const TextStyle(color: AppColors.light),
           ),
         ),
       ],

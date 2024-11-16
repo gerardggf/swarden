@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 
 import '../../../core/generated/translations.g.dart';
 

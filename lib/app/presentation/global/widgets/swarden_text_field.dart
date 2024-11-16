@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swarden/app/core/const/colors.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 
 class SwardenTextField extends StatelessWidget {
   const SwardenTextField({

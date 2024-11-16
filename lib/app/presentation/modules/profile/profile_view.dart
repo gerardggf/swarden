@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
-import 'package:swarden/app/core/extensions/num_to_sizedbox.dart';
+import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 import 'package:swarden/app/domain/repositories/account_repository.dart';
 import 'package:swarden/app/presentation/global/widgets/error_info_widget.dart';
 

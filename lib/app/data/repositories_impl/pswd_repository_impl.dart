@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:swarden/app/core/const/global.dart';
 import 'package:swarden/app/core/enums/storage_keys.dart';
 import 'package:swarden/app/data/services/local/crypto_service.dart';
 
@@ -36,7 +35,7 @@ class PswdRepositoryImpl implements PswdRepository {
   }
 
   @override
-  Future<String?> encryptMessage(String message) async {
+  Future<String?> encryptMessage(String message, String userId) async {
     try {
       final masterKey =
           await secureStorage.read(key: StorageKeysEnum.masterKey.name);
@@ -49,7 +48,7 @@ class PswdRepositoryImpl implements PswdRepository {
       return cryptoService.encryptPassword(
         message,
         masterKey,
-        Global.messagesKeyword,
+        userId,
       );
     } catch (e) {
       if (kDebugMode) {
@@ -60,7 +59,7 @@ class PswdRepositoryImpl implements PswdRepository {
   }
 
   @override
-  Future<String?> decryptMessage(String encryptedMessage) async {
+  Future<String?> decryptMessage(String encryptedMessage, String userId) async {
     try {
       final masterKey =
           await secureStorage.read(key: StorageKeysEnum.masterKey.name);
@@ -74,7 +73,7 @@ class PswdRepositoryImpl implements PswdRepository {
       return cryptoService.decryptPassword(
         encryptedMessage,
         masterKey,
-        Global.messagesKeyword,
+        userId,
       );
     } catch (e) {
       if (kDebugMode) {
