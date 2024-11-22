@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 3
-/// Strings: 177 (59 per locale)
+/// Strings: 180 (60 per locale)
 ///
-/// Built on 2024-11-16 at 16:36 UTC
+/// Built on 2024-11-22 at 13:09 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -238,6 +238,7 @@ class _TranslationsProfileEn {
 
 	// Translations
 	String get profile => 'Profile';
+	String get enterYourPasswordToVerifyTheDeletionOfYourAccount => 'Enter your password to verify the deletion of your account';
 }
 
 // Path: <root>
@@ -353,6 +354,7 @@ class _TranslationsProfileCa implements _TranslationsProfileEn {
 
 	// Translations
 	@override String get profile => 'Perfil';
+	@override String get enterYourPasswordToVerifyTheDeletionOfYourAccount => 'Introduieix la teva contrasenya per verificar l\'eliminació de l\'usuari';
 }
 
 // Path: <root>
@@ -468,6 +470,7 @@ class _TranslationsProfileEs implements _TranslationsProfileEn {
 
 	// Translations
 	@override String get profile => 'Perfil';
+	@override String get enterYourPasswordToVerifyTheDeletionOfYourAccount => 'Introduce tu contraseña para verificar la eliminación de tu cuenta';
 }
 
 /// Flat map(s) containing all translations.
@@ -535,6 +538,7 @@ extension on Translations {
 			case 'global.createdOn': return 'Created on';
 			case 'global.lastModified': return 'Last modified';
 			case 'profile.profile': return 'Profile';
+			case 'profile.enterYourPasswordToVerifyTheDeletionOfYourAccount': return 'Enter your password to verify the deletion of your account';
 			default: return null;
 		}
 	}
@@ -602,6 +606,7 @@ extension on _TranslationsCa {
 			case 'global.createdOn': return 'Creat el';
 			case 'global.lastModified': return 'Modificat el';
 			case 'profile.profile': return 'Perfil';
+			case 'profile.enterYourPasswordToVerifyTheDeletionOfYourAccount': return 'Introduieix la teva contrasenya per verificar l\'eliminació de l\'usuari';
 			default: return null;
 		}
 	}
@@ -669,6 +674,7 @@ extension on _TranslationsEs {
 			case 'global.createdOn': return 'Creado el';
 			case 'global.lastModified': return 'Modificado el';
 			case 'profile.profile': return 'Perfil';
+			case 'profile.enterYourPasswordToVerifyTheDeletionOfYourAccount': return 'Introduce tu contraseña para verificar la eliminación de tu cuenta';
 			default: return null;
 		}
 	}

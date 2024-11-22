@@ -192,7 +192,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     try {
       final usersCollection =
           FirebaseFirestore.instance.collection(Collections.users);
-      DocumentReference docRef = usersCollection.doc(userId);
+      final docRef = usersCollection.doc(userId);
+      final docRefSubc =
+          usersCollection.doc(userId).collection(Collections.passwords);
+      await docRefSubc.get().then(
+        (snapshot) {
+          for (DocumentSnapshot ds in snapshot.docs) {
+            ds.reference.delete();
+          }
+        },
+      );
       await docRef.delete();
       return true;
     } catch (e) {

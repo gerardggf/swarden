@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swarden/app/core/extensions/date_extension.dart';
 import 'package:swarden/app/core/extensions/num_to_sizedbox_extension.dart';
 import 'package:swarden/app/domain/repositories/account_repository.dart';
+import 'package:swarden/app/presentation/global/dialogs/password_delete_account_dialog.dart';
 import 'package:swarden/app/presentation/global/widgets/error_info_widget.dart';
 
 import '../../../core/const/assets.dart';
@@ -112,6 +113,19 @@ class ProfileView extends ConsumerWidget {
               ref.read(sessionControllerProvider.notifier).setUser(null);
               await ref.read(authenticationRepositoryProvider).signOut();
             },
+          ), //TODO:WIP
+          ListTile(
+            title: const Text(
+              'Eliminar cuenta',
+              style: TextStyle(color: Colors.red),
+            ),
+            onTap: () {
+              showDeleteAccountDialog(context, ref);
+            },
+            leading: const Icon(
+              Icons.person_off,
+              color: Colors.red,
+            ),
           ),
         ],
       ),

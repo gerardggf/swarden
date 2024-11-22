@@ -89,7 +89,7 @@ class SWardenDrawer extends ConsumerWidget {
                 final result = await SWardenDialogs.dialog(
                   context: context,
                   title: texts.auth.logout,
-                  content: Text(
+                  content: const Text(
                     '¿Seguro que quieres cerrar sesión?',
                   ),
                 );

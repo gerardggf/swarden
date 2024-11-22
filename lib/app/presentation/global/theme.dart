@@ -35,6 +35,13 @@ class SWardenTheme {
           },
         ),
       ),
+      dialogTheme: const DialogTheme(
+        titleTextStyle: TextStyle(
+          color: AppColors.light,
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+        ),
+      ),
       inputDecorationTheme: const InputDecorationTheme(
         labelStyle: TextStyle(color: AppColors.light),
         focusedBorder: UnderlineInputBorder(
