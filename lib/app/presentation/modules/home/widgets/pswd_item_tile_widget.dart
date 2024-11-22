@@ -10,6 +10,7 @@ import 'package:swarden/app/presentation/global/dialogs/dialogs.dart';
 
 import '../../../../domain/repositories/account_repository.dart';
 import '../../../global/functions/urls_functions.dart';
+import '../../../global/widgets/loading_widget.dart';
 import '../../pswd_item/pswd_item_view.dart';
 
 class PswdItemTileWidget extends ConsumerWidget {
@@ -60,13 +61,14 @@ class PswdItemTileWidget extends ConsumerWidget {
               height: 50,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: pswdItem.url == null
-                    ? Image.asset(Assets.icon)
-                    : Image.network(
-                        getFaviconUrl(
-                          pswdItem.url!,
-                        ),
-                      ),
+                child: ref.watch(getFaviconFutureProvider(pswdItem.url)).when(
+                      data: (url) {
+                        if (url == null) return Image.asset(Assets.icon);
+                        return Image.network(url);
+                      },
+                      error: (_, __) => const SizedBox(),
+                      loading: () => const LoadingWidget(),
+                    ),
               ),
             ),
             15.w,

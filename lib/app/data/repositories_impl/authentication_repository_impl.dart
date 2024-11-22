@@ -98,15 +98,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
             userToCreate.toJson(),
           );
       sessionController.setUser(userToCreate);
-      final result = await signIn(email, password);
-      return result.when(
-        left: (failure) {
-          return Either.left(failure);
-        },
-        right: (data) {
-          return Either.right(data);
-        },
-      );
+      // final result = await signIn(email, password);
+
+      return Either.right(userToCreate);
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
       return Either.left(

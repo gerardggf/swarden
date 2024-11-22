@@ -17,24 +17,27 @@ class ErrorInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon ??
-                const Icon(
-                  Icons.error_outline,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon ??
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 34,
+                  ),
+              15.h,
+              Text(
+                text ?? texts.global.anErrorHasOccurred,
+                style: const TextStyle(
                   color: Colors.red,
-                  size: 34,
+                  fontSize: 16,
                 ),
-            15.h,
-            Text(
-              text ?? texts.global.anErrorHasOccurred,
-              style: const TextStyle(
-                color: Colors.red,
-                fontSize: 16,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

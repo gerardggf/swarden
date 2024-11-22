@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:swarden/app/core/const/colors.dart';
 import 'package:swarden/app/core/extensions/firebase_response_extensions.dart';
 import 'package:swarden/app/domain/firebase_response/firebase_response.dart';
@@ -33,7 +34,6 @@ Future<void> showDeleteAccountDialog(
     context: context,
     builder: (_) => const PasswordDeleteAccountDialog(),
   );
-  print(password);
   if (password == null) return;
   final isCorrectPswd = await notifier.isCorrectPassword(password);
   //If the password is incorrect, the user has to repeat the steps to
@@ -55,7 +55,7 @@ Future<void> showDeleteAccountDialog(
   //Shows the respective snackbar and push the user to the main screen if
   //the deletion is successful.
   if (result != const FirebaseResponse.success()) {
-    Navigator.pop(context);
+    context.pop();
     SWardenDialogs.snackBar(
       context: context,
       text: result.toText(),
@@ -67,10 +67,8 @@ Future<void> showDeleteAccountDialog(
       context: context,
       text: 'accountSuccessfullyDeleted',
     );
-    Navigator.pushNamedAndRemoveUntil(
-      context,
+    context.goNamed(
       AuthView.routeName,
-      (route) => false,
     );
   }
 }
@@ -119,7 +117,7 @@ class _PasswordDeleteAccountDialogState
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
           child: Text(
             texts.global.cancel,
@@ -128,7 +126,7 @@ class _PasswordDeleteAccountDialogState
         ),
         TextButton(
           onPressed: () async {
-            Navigator.pop(context, _textController.text);
+            context.pop(_textController.text);
           },
           child: Text(
             texts.global.confirm,

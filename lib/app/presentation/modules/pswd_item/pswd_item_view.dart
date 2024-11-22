@@ -78,13 +78,16 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                 children: [
                   SizedBox(
                     width: 50,
-                    child: widget.pswdItem.url == null
-                        ? Image.asset(Assets.icon)
-                        : Image.network(
-                            getFaviconUrl(
-                              widget.pswdItem.url!,
-                            ),
-                          ),
+                    child: ref
+                        .watch(getFaviconFutureProvider(widget.pswdItem.url))
+                        .when(
+                          data: (url) {
+                            if (url == null) return Image.asset(Assets.icon);
+                            return Image.network(url);
+                          },
+                          error: (_, __) => const SizedBox(),
+                          loading: () => const LoadingWidget(),
+                        ),
                   ),
                   10.w,
                   FittedBox(

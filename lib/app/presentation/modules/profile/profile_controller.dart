@@ -39,6 +39,9 @@ class ProfileController extends StateNotifier<ProfileState> {
   }
 
   Future<FirebaseResponse> deleteAccount(String password) async {
-    return await authenticationRepository.deleteUserAccount();
+    updateFetching(true);
+    final result = await authenticationRepository.deleteUserAccount();
+    updateFetching(false);
+    return result;
   }
 }

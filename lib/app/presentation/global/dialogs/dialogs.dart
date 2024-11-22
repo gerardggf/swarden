@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/const/colors.dart';
 import '../../../core/generated/translations.g.dart';
@@ -66,7 +67,7 @@ class SWardenDialogs {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                context.pop();
               },
               child: Text(
                 texts.global.cancel,
@@ -76,7 +77,7 @@ class SWardenDialogs {
             if (showConfirmButton)
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  context.pop();
                 },
                 child: Text(
                   texts.global.confirm,
@@ -107,7 +108,7 @@ class SWardenDialogs {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context, false);
+                context.pop(false);
               },
               child: Text(
                 texts.global.cancel,
@@ -117,7 +118,7 @@ class SWardenDialogs {
             if (showConfirmButton)
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context, true);
+                  context.pop(true);
                 },
                 child: Text(
                   texts.global.confirm,
@@ -208,7 +209,7 @@ class _EnterTextDialogState extends State<EnterTextDialog> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
           child: Text(
             texts.global.cancel,
@@ -217,7 +218,7 @@ class _EnterTextDialogState extends State<EnterTextDialog> {
         ),
         TextButton(
           onPressed: () {
-            Navigator.pop(context, textController.text);
+            context.pop(textController.text);
           },
           child: Text(
             texts.global.confirm,
