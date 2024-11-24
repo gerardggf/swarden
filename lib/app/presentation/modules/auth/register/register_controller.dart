@@ -30,20 +30,8 @@ class RegisterController extends StateNotifier<RegisterState> {
     state = state.copyWith(lastName: value);
   }
 
-  void updateTaxName(String value) {
-    state = state.copyWith(taxName: value);
-  }
-
-  void updateCif(String value) {
-    state = state.copyWith(cif: value);
-  }
-
-  void updateAddress(String value) {
-    state = state.copyWith(address: value);
-  }
-
-  void updateCity(String value) {
-    state = state.copyWith(city: value);
+  void updateUsername(String value) {
+    state = state.copyWith(username: value);
   }
 
   void updateEmail(String value) {
@@ -58,24 +46,20 @@ class RegisterController extends StateNotifier<RegisterState> {
     state = state.copyWith(fetching: value);
   }
 
-  void updateAcceptsMailing(bool value) {
-    state = state.copyWith(acceptsMailing: value);
-  }
-
   void updateAcceptsPolicy(bool value) {
     state = state.copyWith(acceptsPolicy: value);
   }
 
-  Future<Either<FirebaseResponse, UserModel>> register(bool isCompany) async {
+  Future<Either<FirebaseResponse, UserModel>> register() async {
     updateFetching(true);
 
     final result = await authenticationRepository.register(
       email: state.email,
       name: state.name,
       lastName: state.lastName,
-      address: state.address,
-      city: state.city,
-      isCompany: isCompany,
+      // username: state.username,
+      // address: state.address,
+      // city: state.city,
       password: state.password,
     );
     updateFetching(false);

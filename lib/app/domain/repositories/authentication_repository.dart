@@ -26,12 +26,10 @@ abstract class AuthenticationRepository {
     required String email,
     required String name,
     required String lastName,
-    required String address,
-    required String city,
-    required bool isCompany,
+    // required String username,
+    // required String address,
+    // required String city,
     required String password,
-    String? taxName,
-    String? cif,
   });
 
   Future<bool> signOut();

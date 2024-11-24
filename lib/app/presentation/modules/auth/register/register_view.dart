@@ -28,15 +28,13 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
       _repeatPasswordController = TextEditingController(),
       _nameController = TextEditingController(),
       _lastNameController = TextEditingController(),
-      _addressController = TextEditingController(),
-      _cityController = TextEditingController();
+      _usernameController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
     _lastNameController.dispose();
-    _addressController.dispose();
-    _cityController.dispose();
+    _usernameController.dispose();
     _emailController.dispose();
     _repeatPasswordController.dispose();
     _passwordController.dispose();
@@ -81,24 +79,24 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
                 controller: _lastNameController,
                 validator: (text) => Validators.validateIsNotEmpty(text),
               ),
-              15.h,
-              SwardenTextField(
-                icon: Icons.location_on,
-                labelText: texts.auth.address,
-                onChanged: (value) {
-                  notifier.updateAddress(value);
-                },
-                controller: _addressController,
-              ),
-              15.h,
-              SwardenTextField(
-                icon: Icons.location_city,
-                labelText: texts.auth.city,
-                onChanged: (value) {
-                  notifier.updateCity(value);
-                },
-                controller: _cityController,
-              ),
+              //15.h,
+              // SwardenTextField(
+              //   icon: Icons.location_on,
+              //   labelText: texts.auth.address,
+              //   onChanged: (value) {
+              //     notifier.updateAddress(value);
+              //   },
+              //   controller: _addressController,
+              // ),
+              // 15.h,
+              // SwardenTextField(
+              //   icon: Icons.location_city,
+              //   labelText: texts.auth.city,
+              //   onChanged: (value) {
+              //     notifier.updateCity(value);
+              //   },
+              //   controller: _cityController,
+              // ),
               15.h,
               SwardenTextField(
                 icon: Icons.email_outlined,
@@ -194,7 +192,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
 
     final notifier = ref.read(registerControllerProvider.notifier);
     notifier.updateFetching(true);
-    final result = await notifier.register(false);
+    final result = await notifier.register();
     notifier.updateFetching(false);
     if (!mounted) return;
 

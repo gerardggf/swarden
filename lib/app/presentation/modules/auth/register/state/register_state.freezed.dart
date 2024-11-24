@@ -18,15 +18,13 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RegisterState {
   String get name => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
-  String get taxName => throw _privateConstructorUsedError;
-  String get cif => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
+  String get username =>
+      throw _privateConstructorUsedError; // @Default('') String address,
+// @Default('') String city,
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   bool get fetching => throw _privateConstructorUsedError;
   bool get acceptsPolicy => throw _privateConstructorUsedError;
-  bool get acceptsMailing => throw _privateConstructorUsedError;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -44,15 +42,11 @@ abstract class $RegisterStateCopyWith<$Res> {
   $Res call(
       {String name,
       String lastName,
-      String taxName,
-      String cif,
-      String address,
-      String city,
+      String username,
       String email,
       String password,
       bool fetching,
-      bool acceptsPolicy,
-      bool acceptsMailing});
+      bool acceptsPolicy});
 }
 
 /// @nodoc
@@ -72,15 +66,11 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
   $Res call({
     Object? name = null,
     Object? lastName = null,
-    Object? taxName = null,
-    Object? cif = null,
-    Object? address = null,
-    Object? city = null,
+    Object? username = null,
     Object? email = null,
     Object? password = null,
     Object? fetching = null,
     Object? acceptsPolicy = null,
-    Object? acceptsMailing = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -91,21 +81,9 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      taxName: null == taxName
-          ? _value.taxName
-          : taxName // ignore: cast_nullable_to_non_nullable
-              as String,
-      cif: null == cif
-          ? _value.cif
-          : cif // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -123,10 +101,6 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.acceptsPolicy
           : acceptsPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptsMailing: null == acceptsMailing
-          ? _value.acceptsMailing
-          : acceptsMailing // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -142,15 +116,11 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
   $Res call(
       {String name,
       String lastName,
-      String taxName,
-      String cif,
-      String address,
-      String city,
+      String username,
       String email,
       String password,
       bool fetching,
-      bool acceptsPolicy,
-      bool acceptsMailing});
+      bool acceptsPolicy});
 }
 
 /// @nodoc
@@ -168,15 +138,11 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? lastName = null,
-    Object? taxName = null,
-    Object? cif = null,
-    Object? address = null,
-    Object? city = null,
+    Object? username = null,
     Object? email = null,
     Object? password = null,
     Object? fetching = null,
     Object? acceptsPolicy = null,
-    Object? acceptsMailing = null,
   }) {
     return _then(_$RegisterStateImpl(
       name: null == name
@@ -187,21 +153,9 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      taxName: null == taxName
-          ? _value.taxName
-          : taxName // ignore: cast_nullable_to_non_nullable
-              as String,
-      cif: null == cif
-          ? _value.cif
-          : cif // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -219,10 +173,6 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
           ? _value.acceptsPolicy
           : acceptsPolicy // ignore: cast_nullable_to_non_nullable
               as bool,
-      acceptsMailing: null == acceptsMailing
-          ? _value.acceptsMailing
-          : acceptsMailing // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -233,15 +183,11 @@ class _$RegisterStateImpl implements _RegisterState {
   _$RegisterStateImpl(
       {this.name = '',
       this.lastName = '',
-      this.taxName = '',
-      this.cif = '',
-      this.address = '',
-      this.city = '',
+      this.username = '',
       this.email = '',
       this.password = '',
       this.fetching = false,
-      this.acceptsPolicy = false,
-      this.acceptsMailing = false});
+      this.acceptsPolicy = false});
 
   @override
   @JsonKey()
@@ -251,16 +197,9 @@ class _$RegisterStateImpl implements _RegisterState {
   final String lastName;
   @override
   @JsonKey()
-  final String taxName;
-  @override
-  @JsonKey()
-  final String cif;
-  @override
-  @JsonKey()
-  final String address;
-  @override
-  @JsonKey()
-  final String city;
+  final String username;
+// @Default('') String address,
+// @Default('') String city,
   @override
   @JsonKey()
   final String email;
@@ -273,13 +212,10 @@ class _$RegisterStateImpl implements _RegisterState {
   @override
   @JsonKey()
   final bool acceptsPolicy;
-  @override
-  @JsonKey()
-  final bool acceptsMailing;
 
   @override
   String toString() {
-    return 'RegisterState(name: $name, lastName: $lastName, taxName: $taxName, cif: $cif, address: $address, city: $city, email: $email, password: $password, fetching: $fetching, acceptsPolicy: $acceptsPolicy, acceptsMailing: $acceptsMailing)';
+    return 'RegisterState(name: $name, lastName: $lastName, username: $username, email: $email, password: $password, fetching: $fetching, acceptsPolicy: $acceptsPolicy)';
   }
 
   @override
@@ -290,24 +226,20 @@ class _$RegisterStateImpl implements _RegisterState {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
-            (identical(other.taxName, taxName) || other.taxName == taxName) &&
-            (identical(other.cif, cif) || other.cif == cif) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.city, city) || other.city == city) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.fetching, fetching) ||
                 other.fetching == fetching) &&
             (identical(other.acceptsPolicy, acceptsPolicy) ||
-                other.acceptsPolicy == acceptsPolicy) &&
-            (identical(other.acceptsMailing, acceptsMailing) ||
-                other.acceptsMailing == acceptsMailing));
+                other.acceptsPolicy == acceptsPolicy));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, lastName, taxName, cif,
-      address, city, email, password, fetching, acceptsPolicy, acceptsMailing);
+  int get hashCode => Object.hash(runtimeType, name, lastName, username, email,
+      password, fetching, acceptsPolicy);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -322,28 +254,19 @@ abstract class _RegisterState implements RegisterState {
   factory _RegisterState(
       {final String name,
       final String lastName,
-      final String taxName,
-      final String cif,
-      final String address,
-      final String city,
+      final String username,
       final String email,
       final String password,
       final bool fetching,
-      final bool acceptsPolicy,
-      final bool acceptsMailing}) = _$RegisterStateImpl;
+      final bool acceptsPolicy}) = _$RegisterStateImpl;
 
   @override
   String get name;
   @override
   String get lastName;
   @override
-  String get taxName;
-  @override
-  String get cif;
-  @override
-  String get address;
-  @override
-  String get city;
+  String get username; // @Default('') String address,
+// @Default('') String city,
   @override
   String get email;
   @override
@@ -352,8 +275,6 @@ abstract class _RegisterState implements RegisterState {
   bool get fetching;
   @override
   bool get acceptsPolicy;
-  @override
-  bool get acceptsMailing;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.

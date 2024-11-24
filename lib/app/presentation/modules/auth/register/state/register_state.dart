@@ -7,14 +7,12 @@ class RegisterState with _$RegisterState {
   factory RegisterState({
     @Default('') String name,
     @Default('') String lastName,
-    @Default('') String taxName,
-    @Default('') String cif,
-    @Default('') String address,
-    @Default('') String city,
+    @Default('') String username,
+    // @Default('') String address,
+    // @Default('') String city,
     @Default('') String email,
     @Default('') String password,
     @Default(false) bool fetching,
     @Default(false) bool acceptsPolicy,
-    @Default(false) bool acceptsMailing,
   }) = _RegisterState;
 }

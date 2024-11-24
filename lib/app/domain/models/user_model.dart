@@ -2,48 +2,54 @@ import 'package:swarden/app/core/enums/roles.dart';
 
 class UserModel {
   final String id;
+  final String name;
+  final String lastName;
   final String username;
   final String email;
   final Roles role;
-  final String? countryCode;
 
   UserModel({
     required this.id,
     required this.email,
     required this.username,
     required this.role,
-    required this.countryCode,
+    required this.name,
+    required this.lastName,
   });
 
   UserModel copyWith({
     String? id,
     String? username,
     Roles? role,
-    String? countryCode,
     String? email,
+    String? name,
+    String? lastName,
   }) =>
       UserModel(
         id: id ?? this.id,
         username: username ?? this.username,
         role: role ?? this.role,
-        countryCode: countryCode ?? this.countryCode,
         email: email ?? this.email,
+        name: name ?? this.name,
+        lastName: lastName ?? this.lastName,
       );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"] ?? '',
         username: json["username"] ?? '',
         role: stringToRole(json["role"]) ?? Roles.user,
-        countryCode: json["countryCode"] ?? 'ES',
         email: json["email"] ?? '',
+        name: json["name"] ?? '',
+        lastName: json["lastName"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
         "role": role.name,
-        "countryCode": countryCode,
         "email": email,
+        "name": name,
+        "lastName": lastName
       };
 
   static Roles? stringToRole(String? role) {

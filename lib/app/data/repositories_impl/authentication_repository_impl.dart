@@ -66,12 +66,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     required String email,
     required String name,
     required String lastName,
-    required String address,
-    required String city,
-    required bool isCompany,
+    // required String address,
+    // required String city,
     required String password,
-    String? taxName,
-    String? cif,
   }) async {
     try {
       final credentials =
@@ -88,7 +85,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         email: email,
         username: email.split('@').first,
         role: Roles.user,
-        countryCode: 'ES',
+        name: name,
+        lastName: lastName,
       );
 
       await FirebaseFirestore.instance

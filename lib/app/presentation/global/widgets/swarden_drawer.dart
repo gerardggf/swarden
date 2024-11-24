@@ -96,6 +96,8 @@ class SWardenDrawer extends ConsumerWidget {
                 if (result != true) return;
                 ref.read(sessionControllerProvider.notifier).setUser(null);
                 await ref.read(authenticationRepositoryProvider).signOut();
+                if (!context.mounted) return;
+                context.pop();
               },
             ),
           ],
