@@ -131,6 +131,7 @@ class _PswdItemViewState extends ConsumerState<PswdItemView> {
                     Expanded(
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
+                        alignment: AlignmentDirectional.centerStart,
                         child: Text(
                           widget.pswdItem.username,
                           style: Theme.of(context)

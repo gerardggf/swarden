@@ -17,7 +17,7 @@ import '../../global/widgets/error_info_widget.dart';
 import 'widgets/pswd_item_tile_widget.dart';
 
 final pswdItemsStreamProvider =
-    StreamProvider<SwardenEither<List<PswdItemModel>>>(
+    StreamProvider.autoDispose<SwardenEither<List<PswdItemModel>>>(
   (ref) {
     return ref.read(accountRepositoryProvider).subscribeToPswdItems();
   },
