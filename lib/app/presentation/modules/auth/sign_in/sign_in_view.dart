@@ -10,7 +10,6 @@ import '../../../../core/generated/translations.g.dart';
 import '../../../global/dialogs/dialogs.dart';
 import '../../../global/widgets/swarden_button.dart';
 import '../auth_view.dart';
-import '../forgot_password/forgot_password_view.dart';
 import '../register/register_view.dart';
 import 'sign_in_controller.dart';
 
@@ -119,19 +118,20 @@ class _RegisterViewState extends ConsumerState<SignInView> {
                         texts.auth.signIn,
                       ),
                     ),
-                    15.h,
-                    TextButton(
-                      onPressed: () {
-                        context.pushNamed(ForgotPasswordView.routeName);
-                      },
-                      child: Text(
-                        texts.auth.forgotYourPassword,
-                        style: const TextStyle(
-                          color: AppColors.light,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
+                    //NO SE PUEDE CAMBIAR LA CONTRAEÑA DEL USUARIO PORQUE SI NO SE PIERDE LA CLAVE PARA DESCIFRAR LAS CONTRASEÑAS
+                    // 15.h,
+                    // TextButton(
+                    //   onPressed: () {
+                    //     context.pushNamed(ForgotPasswordView.routeName);
+                    //   },
+                    //   child: Text(
+                    //     texts.auth.forgotYourPassword,
+                    //     style: const TextStyle(
+                    //       color: AppColors.light,
+                    //       decoration: TextDecoration.underline,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

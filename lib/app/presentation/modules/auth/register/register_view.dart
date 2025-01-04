@@ -52,7 +52,6 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
         title: Text(texts.auth.register),
       ),
       body: Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         key: _particularFormKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -61,6 +60,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
             children: [
               10.h,
               SwardenTextField(
+                key: const Key('name'),
                 icon: Icons.person,
                 labelText: '${texts.auth.name}*',
                 onChanged: (value) {
@@ -71,13 +71,16 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
               ),
               15.h,
               SwardenTextField(
+                key: const Key('lastName'),
                 icon: Icons.people,
                 labelText: '${texts.auth.lastName}*',
                 onChanged: (value) {
                   notifier.updateLastName(value);
                 },
                 controller: _lastNameController,
-                validator: (text) => Validators.validateIsNotEmpty(text),
+                validator: (text) {
+                  return Validators.validateIsNotEmpty(text);
+                },
               ),
               //15.h,
               // SwardenTextField(
@@ -99,6 +102,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
               // ),
               15.h,
               SwardenTextField(
+                key: const Key('email'),
                 icon: Icons.email_outlined,
                 labelText: '${texts.auth.email}*',
                 onChanged: (value) {
@@ -109,6 +113,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
               ),
               15.h,
               SwardenTextField(
+                key: const Key('password'),
                 icon: Icons.password,
                 labelText: '${texts.auth.password}*',
                 onChanged: (value) {
@@ -120,6 +125,7 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
               ),
               15.h,
               SwardenTextField(
+                key: const Key('passwordRepeat'),
                 icon: Icons.password,
                 labelText: '${texts.auth.repeatPassword}*',
                 obscureText: true,
@@ -176,6 +182,49 @@ class _ParticularRegisterWidgetState extends ConsumerState<RegisterView> {
       ),
     );
   }
+
+  // Widget _buildTextForm({
+  //   required TextEditingController controller,
+  //   String? labelText,
+  //   String? Function(String?)? validator,
+  //   IconData? icon,
+  //   bool obscureText = false,
+  //   void Function(String value)? onChanged,
+  //   TextCapitalization? textCapitalization,
+  // }) =>
+  //     Row(
+  //       children: [
+  //         if (icon != null) Icon(icon),
+  //         if (icon != null) 15.w,
+  //         Expanded(
+  //           child: TextFormField(
+  //             onTapOutside: (_) {
+  //               FocusManager.instance.primaryFocus?.unfocus();
+  //             },
+  //             obscureText: obscureText,
+  //             controller: controller,
+  //             onChanged: onChanged,
+  //             textCapitalization: textCapitalization ?? TextCapitalization.none,
+  //             cursorColor: AppColors.light,
+  //             autovalidateMode: AutovalidateMode.onUnfocus,
+  //             decoration: InputDecoration(
+  //               focusColor: AppColors.light,
+  //               label: labelText == null ? null : Text(labelText!),
+  //               labelStyle: const TextStyle(
+  //                 color: Colors.black54,
+  //               ),
+  //               focusedBorder: const UnderlineInputBorder(
+  //                 borderSide: BorderSide(color: AppColors.light),
+  //               ),
+  //               border: const UnderlineInputBorder(
+  //                 borderSide: BorderSide(color: AppColors.light),
+  //               ),
+  //             ),
+  //             validator: validator,
+  //           ),
+  //         ),
+  //       ],
+  //     );
 
   Future<void> _submit() async {
     if (!_particularFormKey.currentState!.validate()) {
